@@ -219,4 +219,22 @@ prowizjê, ani osob z departamentu 90. Kolumnom nadaj aliasy.
 SELECT * FROM EMPLOYEES;
 SELECT FIRST_NAME,SUBSTR(FIRST_NAME,1,1) FROM EMPLOYEES;
 
-SELECT substr(firsT_name,1,1)||'.'||last_name from employees;
+SELECT upper(first_name) imie,upper(last_name) nazwisko, lower(substr(firsT_name,1,1)||'.'||last_name||'@jsystems.pl')  email
+from employees
+where commission_pct is null and department_id<>90;
+
+select * from employees;
+
+SELECT DEPARTMENT_ID,SALARY,SALARY/DEPARTMENT_ID FROM EMPLOYEES;
+SELECT DEPARTMENT_ID,SALARY,SALARY/DEPARTMENT_ID,ROUND(SALARY/DEPARTMENT_ID),TRUNC(SALARY/DEPARTMENT_ID) FROM EMPLOYEES;
+SELECT DEPARTMENT_ID,SALARY,SALARY/DEPARTMENT_ID,ROUND(SALARY/DEPARTMENT_ID,2),TRUNC(SALARY/DEPARTMENT_ID,2) FROM EMPLOYEES;
+
+SELECT NVL(COMMISSION_PCT*SALARY,0) FROM EMPLOYEES;
+
+--PRZERWA OBIADOWA DO 14:26
+/*
+8. 
+Wyœwietl nazwiska, wynagrodzenia, prowizje i wartosc prowizji wyliczona jako iloczyn wynagrodzenia i prowizji 
+zaokraglony do 2 miejsc po przecinku. Zadbaj o to by w ostatniej kolumnie nigdy nie pojawial sie null. W przypadku
+pojawienia sie null'a chcemy tam wstawic 0. Wynik posortuj po ostatniej kolumnie malejaco.
+*/
