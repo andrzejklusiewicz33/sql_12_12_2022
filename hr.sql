@@ -218,3 +218,5 @@ prowizjê, ani osob z departamentu 90. Kolumnom nadaj aliasy.
 
 SELECT * FROM EMPLOYEES;
 SELECT FIRST_NAME,SUBSTR(FIRST_NAME,1,1) FROM EMPLOYEES;
+
+SELECT substr(firsT_name,1,1)||'.'||last_name from employees;
