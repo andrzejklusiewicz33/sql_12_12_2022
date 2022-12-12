@@ -89,3 +89,33 @@ select * from employees;
 miala alias a wynik byl posortowany malejaco wg. daty zatrudnienia a w przypadku tej samej daty zatrudnienia
 malejaco po wysokosci wynagrodzenia.
 */
+
+select * from employees;
+desc employees;
+
+select last_name,hire_date,salary from employees;
+select last_name nazwisko,hire_date data_zatrudnienia,salary wynagrodzenie from employees;
+select last_name nazwisko,hire_date data_zatrudnienia,salary wynagrodzenie from employees order by hire_date desc;
+select last_name nazwisko,hire_date data_zatrudnienia,salary wynagrodzenie from employees order by hire_date desc,salary desc;
+select last_name nazwisko,hire_date data_zatrudnienia,salary wynagrodzenie from employees order by data_zatrudnienia desc,wynagrodzenie desc;
+select last_name nazwisko,hire_date data_zatrudnienia,salary wynagrodzenie from employees order by 2 desc,3 desc;
+
+
+
+select * from employees order by commission_pct;
+
+select * from employees order by commission_pct desc;
+select * from employees order by commission_pct desc nulls last;
+
+select * from employees order by commission_pct nulls first;
+
+select * from employees order by commission_pct nulls first,last_name;
+
+
+select department_id,department_id*1000,department_id/10 kolumna_a,salary*commission_pct kolumna_b from employees;
+/*
+2. Wyœwietl nazwiska, prowizje, wynagrodzenie i wynik mnozenia kolumny z wynagrodzeniem razy kolumna z prowizja. 
+Kolumnom nadaj aliasy, a wynik posortuj w taki sposob by najpierw byl wiersze majace wartosci w prowizjach (sortowanie malejace),
+po nich te majace null w wartosci prowizji
+*/
+
