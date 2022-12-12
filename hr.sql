@@ -381,3 +381,9 @@ select to_char( min(hire_Date),'dd-mm-yyyy') from employees;
 /*14.
 Wyœwietl z dokladnoscia do 2 miejsc po przecinku przycieta ilosc lat pomiedzy zatrudnieniem pierwszej i ostatniej osoby w firmie
 */
+
+select trunc(months_between(max(hire_date),min(hire_date))/12,2) from employees;
+
+/*15.
+Wyœwietl iloœæ osob otrzymujacych jakas prowizjê które nie zostaly zatrudnione w 2001 roku
+*/
