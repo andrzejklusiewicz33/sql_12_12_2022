@@ -173,3 +173,12 @@ Wyœwietl nazwiska, wynagrodzenia, prowizjê,numer departamentu osób które nie pra
 zarabiaja wiecej niz 5000. Kolumnom nadaj aliasy a wynik posortuj rosnaco najpierw wg  numeru departamentu,
 a w przypadku tego samego numeru departamentu malejaco po wynagrodzeniu.
 */
+
+
+select last_name nazwisko,salary wynagrodzenie,commission_pct prowizja,department_id departament from employees
+where department_id<>50 and salary>5000
+order by department_id, salary desc;
+
+/*5. 
+Wyœwietl osoby których nazwisko zaczyna siê na K a jednoczeœnie otrzymuj¹ jakas prowizje
+*/
