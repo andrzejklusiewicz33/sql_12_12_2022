@@ -311,3 +311,29 @@ select * from employees where hire_date<to_date('01-01-2004','dd-mm-yyyy');
 Wyœwietl nazwiska i daty zatrudnienia w formacie dd-mm-yyyy osob ktore zostaly zatrudnione pomiêdzy 01-01-2002 a 31-12-2004.
 Wynik powinien byc posortowany odwrotnie chronolicznie (tak by najpozniej zatrudnieni byli wyswietlani jako pierwsi).
 */
+
+select * from employees where salary between 4000 and 5000;
+
+select * from employees where (salary > 5000 and commission_pct is not null) or department_id=90;
+
+
+select last_name,to_char(hire_date,'dd-mm-yyyy') from employees;
+select last_name,to_char(hire_date,'dd-mm-yyyy') from employees
+where hire_date>=to_date('01-01-2002','dd-mm-yyyy') and hire_date<=to_date('31-12-2004','dd-mm-yyyy')
+order by hire_date desc;
+
+
+select last_name,to_char(hire_date,'dd-mm-yyyy') from employees
+where hire_date>=to_date('01-01-2002','dd-mm-yyyy') and hire_date<=to_date('31-12-2004','dd-mm-yyyy')
+order by 2 desc; --fuuuuu
+
+
+select last_name,to_char(hire_date,'dd-mm-yyyy') from employees
+where hire_date between to_date('01-01-2002','dd-mm-yyyy') and to_date('31-12-2004','dd-mm-yyyy')
+order by hire_date desc;
+
+/*12.
+**. Dowiedz siê jakiego dnia tygodnia siê urodziles (tylko nie dzwon do mamy ;) )
+*/
+
+select to_char(sysdate,'day') from dual;
