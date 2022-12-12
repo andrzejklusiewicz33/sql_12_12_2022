@@ -165,3 +165,11 @@ select * from employees where commission_pct is not null;
 /*3.
 Wyœwietl nazwiska,imiona i wynagrodzenia osob zarabiajacych wiecej niz 10000. Wynik posortuj malej¹co wg. wynagrodzeñ.
 */
+
+select last_name,first_name,salary from employees order by 3 desc;
+
+/*4.
+Wyœwietl nazwiska, wynagrodzenia, prowizjê,numer departamentu osób które nie pracuja w departamencie numer 50 i jednoczesnie
+zarabiaja wiecej niz 5000. Kolumnom nadaj aliasy a wynik posortuj rosnaco najpierw wg  numeru departamentu,
+a w przypadku tego samego numeru departamentu malejaco po wynagrodzeniu.
+*/
