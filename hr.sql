@@ -373,3 +373,11 @@ select last_name,salary,salary- (select avg(salary) from employees) from employe
 Wyswietl w formacie dd-mm-yyyy najwczesniejsza datê zatrudnienia w firmie.
 
 */
+
+select min(hire_Date) from employees;
+select to_char( min(hire_Date),'dd-mm-yyyy') from employees;
+
+
+/*14.
+Wyœwietl z dokladnoscia do 2 miejsc po przecinku przycieta ilosc lat pomiedzy zatrudnieniem pierwszej i ostatniej osoby w firmie
+*/
