@@ -182,3 +182,21 @@ order by department_id, salary desc;
 /*5. 
 Wyœwietl osoby których nazwisko zaczyna siê na K a jednoczeœnie otrzymuj¹ jakas prowizje
 */
+select * from employees where last_name like 'K%' and commission_pct is not null;
+
+--SQL Developer
+--Dbeaver
+--PL/SQL Developer
+--Toad
+/
+
+select last_name from employees;
+select last_name,upper(last_name),lower(last_name),initcap(last_name),length(lasT_name),last_name||' '||first_name imie_i_nazwisko from employees;
+select last_name,substr(last_name,1,3), upper(   substr(last_name,1,3)  ) from employees;
+select * from employees where last_name like '%k%' or last_name like '%K%';
+select * from employees where upper(last_name) like '%K%';
+
+select last_name from employees where department_id = 50 order by salary;
+/*
+6. Wyœwietl imiona i nazwiska powiêkszone i sklejone do jednej kolumny. Wynik powinien byæ posortowany po nazwiskach a kolumna mieæ alias.
+*/
