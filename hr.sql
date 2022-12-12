@@ -200,3 +200,21 @@ select last_name from employees where department_id = 50 order by salary;
 /*
 6. Wyœwietl imiona i nazwiska powiêkszone i sklejone do jednej kolumny. Wynik powinien byæ posortowany po nazwiskach a kolumna mieæ alias.
 */
+
+select firsT_name||' '||last_name from employees;
+
+select upper(firsT_name||' '||last_name) from employees;
+
+select UPPER(firsT_name)||' '||UPPER(last_name) from employees;
+
+select upper(firsT_name||' '||last_name) IMIE_I_NAZWISKO from employees ORDER BY LAST_NAME;
+
+/*7.
+**. Wyœwietl powiekszone nazwiska,imiona i emaile. Emaile nie pobieraj z kolumny email tylko wygeneruj.
+Adresy email powinny skladac sie z pierwszej litery imienia, kropki, calego nazwiska i ciagu @jsystems.pl.
+Caly adres email powinien byc napisany malymi literami. W wyniku nie chcemy osob ktore otrzymuja jakas 
+prowizjê, ani osob z departamentu 90. Kolumnom nadaj aliasy.
+*/
+
+SELECT * FROM EMPLOYEES;
+SELECT FIRST_NAME,SUBSTR(FIRST_NAME,1,1) FROM EMPLOYEES;
