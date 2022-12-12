@@ -387,3 +387,14 @@ select trunc(months_between(max(hire_date),min(hire_date))/12,2) from employees;
 /*15.
 Wyœwietl iloœæ osob otrzymujacych jakas prowizjê które nie zostaly zatrudnione w 2001 roku
 */
+
+select count(*) from employees where commission_pct is not null and to_char(hire_date,'yyyy')<>2001;
+
+
+
+
+select count(*) from employees where commission_pct is not null and hire_date<>to_date('01-01-2001','dd-mm-yyyy');
+
+/*16.
+Wyœwietl sumê wynagrodzeñ osób które nie zostaly zatrudnione w latach 2001-2005
+*/
