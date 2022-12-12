@@ -294,3 +294,20 @@ select user from dual;
 select user from employees;
 select user,systimestamp from dual;
 
+
+select firsT_name,last_name from employees;
+select firsT_name,last_name,to_char(hire_date,'dd-mm-yyyy') from employees;
+select firsT_name,last_name,to_char(hire_date,'dd-mm-yyyy'),months_between(sysdate,hire_date) from employees;
+select firsT_name,last_name,to_char(hire_date,'dd-mm-yyyy'),months_between(sysdate,hire_date)/12 from employees;
+select firsT_name,last_name,to_char(hire_date,'dd-mm-yyyy'),trunc(months_between(sysdate,hire_date)/12) from employees;
+
+--przerwa do 15:44
+
+select * from employees where hire_date<'01-01-2001'; ---fuuuuu
+
+select * from employees where hire_date<to_date('01-01-2004','dd-mm-yyyy');
+
+/*11.
+Wyœwietl nazwiska i daty zatrudnienia w formacie dd-mm-yyyy osob ktore zostaly zatrudnione pomiêdzy 01-01-2002 a 31-12-2004.
+Wynik powinien byc posortowany odwrotnie chronolicznie (tak by najpozniej zatrudnieni byli wyswietlani jako pierwsi).
+*/
