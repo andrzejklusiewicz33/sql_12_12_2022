@@ -238,3 +238,28 @@ Wyœwietl nazwiska, wynagrodzenia, prowizje i wartosc prowizji wyliczona jako ilo
 zaokraglony do 2 miejsc po przecinku. Zadbaj o to by w ostatniej kolumnie nigdy nie pojawial sie null. W przypadku
 pojawienia sie null'a chcemy tam wstawic 0. Wynik posortuj po ostatniej kolumnie malejaco.
 */
+
+--SELECT NVL( ROUND(SALARY*0.33,2) ,0) FROM EMPLOYEES;
+
+SELECT LAST_NAME,SALARY, COMMISSION_PCT, NVL(ROUND(SALARY*COMMISSION_PCT,2),0)
+FROM EMPLOYEES ORDER BY 4 DESC;
+
+
+SELECT LAST_NAME NAZWISKO,SALARY WYNAGRODZENIE, COMMISSION_PCT PROWIZJA, NVL(ROUND(SALARY*COMMISSION_PCT,2),0) WARTOSC_PROWIZJI
+FROM EMPLOYEES ORDER BY 4 DESC;
+/
+
+SELECT * FROM DUAL;
+SELECT SYSDATE FROM DUAL;
+SELECT SYSTIMESTAMP FROM DUAL;
+
+SELECT SYSTIMESTAMP FROM EMPLOYEES;
+
+SELECT UPPER('dupa') from dual;
+
+select last_name,hire_date,to_char(hire_date,'dd-mm-yyyy hh24:mi:ss d day month year w ww q') from employees;
+select * from employees where to_char(hire_date,'mm')>6;
+
+/*9.
+*. Wyœwietl osoby zatrudnione w weekend
+*/
