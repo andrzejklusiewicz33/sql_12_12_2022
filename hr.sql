@@ -337,3 +337,39 @@ order by hire_date desc;
 */
 
 select to_char(sysdate,'day') from dual;
+
+select to_char(to_date('29-09-1986','dd-mm-yyyy'),'day') from dual;
+/
+
+--sum,max,min,avg,count
+
+select * from employees;
+select sum(salary) from employees;
+select sum(salary),last_name from employees; --fuuu
+select sum(salary),count(*) from employees;
+select sum(salary),count(*) from employees where department_id=90;
+select sum(salary)/100 from employees;
+select sum(salary*commission_pct) from employees;
+select min(salary),max(salary) from employees;
+select min(salary),max(salary) from employees where department_id=90;
+select min(hire_date),max(hire_date) from employees;
+select max(hire_date)-min(hire_date) from employees;
+select min(last_name),max(last_name) from employees;
+select avg(salary) from employees;
+select min(salary*commission_pct),max(salary*commission_pct), avg(salary*commission_pct) from employees;
+select avg(salary),round(avg(salary),2) from employees;
+select count(*) from employees;
+select count(*) from employees where department_id=60;
+select count(*),count(commission_pct) from employees;
+
+select distinct department_id from employees;
+select count(distinct department_id) from employees;
+select count(salary),last_name from employees;
+
+select last_name, (select count(*) from employees) from employees;
+select last_name,salary,salary- (select avg(salary) from employees) from employees;
+
+/*13.
+Wyswietl w formacie dd-mm-yyyy najwczesniejsza datê zatrudnienia w firmie.
+
+*/
