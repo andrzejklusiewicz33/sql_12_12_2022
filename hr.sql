@@ -263,3 +263,34 @@ select * from employees where to_char(hire_date,'mm')>6;
 /*9.
 *. Wyœwietl osoby zatrudnione w weekend
 */
+
+select * from employees where to_char(hire_date,'d')>5;
+select * from employees where to_char(hire_date,'d') in (6,7);
+select * from employees where to_char(hire_date,'d') in ('6','7');
+select * from employees where to_char(hire_date,'d')=6 or to_char(hire_date,'d')=7;
+select * from employees where to_char(hire_date,'day') like '%sobota%' or to_char(hire_date,'day') like '%niedziela%';
+
+select sysdate from dual;
+select sysdate,to_char(sysdate,'dd-mm-yyyy hh24:mi:ss') from dual;
+
+select sysdate,to_char(  trunc(sysdate,'day') ,'dd-mm-yyyy hh24:mi:ss') from dual;
+select sysdate,to_char(  trunc(sysdate,'month') ,'dd-mm-yyyy hh24:mi:ss') from dual;
+
+select sysdate-hire_date,hire_date,last_name from employees;
+select to_char(hire_date,'dd-mm-yyyy hh24:mi:ss') from employees;
+
+select trunc(sysdate-hire_date),hire_date,last_name from employees;
+select hire_date,hire_date-1000,last_name from employees;
+select hire_date,hire_date+1000,last_name from employees;
+select sysdate,add_months(sysdate,10) from dual;
+select sysdate,hire_date,sysdate-hire_date,months_between(sysdate,hire_date) from employees;
+select sysdate,hire_date,sysdate-hire_date,months_between(sysdate,hire_date),months_between(sysdate,hire_date)/12 from employees;
+
+/*10.
+ Wyœwietl imiona, nazwiska, daty zatrudnienia w formacie dd-mm-yyyy i iloœæ PE£NYCH lat przepracowanych w firmie.
+*/
+
+select user from dual;
+select user from employees;
+select user,systimestamp from dual;
+
