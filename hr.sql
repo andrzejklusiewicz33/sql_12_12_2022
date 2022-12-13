@@ -696,3 +696,17 @@ select * from employees where employee_id in (select manager_id from departments
 pojawia sie w wartosciach kolumny manager_id innych pracownikow.
 */
 select * from employees;
+
+select * from employees where employee_id in (select manager_id from employees);
+select count(*) from employees;
+select 107-18 from dual;
+
+select * from employees where employee_id not in (select manager_id from employees);
+select * from employees where department_id in (10,20,30,null);
+select * from employees where department_id not in (10,20,30,null);
+
+select * from employees where employee_id not in (select manager_id from employees where manager_id is not null);
+
+/*26.
+Wyœwietl goœci którzy nie sa managerami ani innych pracownikow ani zadnego z departamentow.
+*/
