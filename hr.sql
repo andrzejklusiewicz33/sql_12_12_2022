@@ -741,3 +741,28 @@ where to_char(hire_date,'mm')>6;
 Wyœwietl poszczególne lata zatrudnienia,liczbe pracownikow zatrudnionych w danym roku, srednia zarobkow w danym roku przycieta do centow,
 roznicê pomiêdzy najwy¿szymi i najni¿szymi zarobkami wœród osób zatrudnionych w danym roku. Do obliczeñ nie chcemy braæ pod uwagê prezesa.
 */
+
+select to_char(hire_date,'yyyy'),round(avg(salary),2)
+from employees
+where department_Id in (10,20,30)
+group by to_char(hire_date,'yyyy')
+order by 1;
+
+
+select to_char(hire_date,'yyyy') rok,count(*) liczba_pracownikow,round(avg(salary),2) srednia_zarobkow,max(salary)-min(salary) roznica_najwyzzsze_najnizsze
+from employees
+where manager_id is not null
+group by to_char(hire_date,'yyyy')
+order by 1;
+
+
+
+--przerwa do 15:36
+
+
+/*29.
+Wyœwietl numery pracownikow, nazwiska, wynagrodzenia, srednie zarobki w calej firmie zaokragone do $, roznicê pomiêdzy 
+zarobkami danego goœcia a œrednia zarobkow w calej firmie. Wynik posortuj tak by na poczatku byly osoby najlepiej 
+zarabiajace.
+*/
+
