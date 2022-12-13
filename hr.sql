@@ -502,5 +502,39 @@ Wyswietl grupy pracownikow wg. roku zatrudnienia a obok roku zatrudnienia wyswie
 sumê zarobkow wsrod osob zatrudnionych w danym roku.
 Interesuja nas tylko grupy ktore maja sumê zarobkow wieksza niz 30000. Wynik posortuj
 malejaco wg. sumy zarobkow a kolumnom nadaj aliasy.
+*/
 
+select to_char(hire_date,'yyyy') rok,sum(salary) suma
+from employees 
+group by to_char(hire_date,'yyyy')
+having sum(salary)>30000
+order by 2 desc;
+/
+
+create table fakturki as select employee_id numer_faktury, hire_date data_faktury, salary suma_faktury from employees;
+
+select * from fakturki;
+
+
+select to_char(data_faktury,'yyyy'),to_char(data_faktury,'mm'),count(*),sum(suma_faktury)
+from fakturki 
+group by to_char(data_faktury,'yyyy'),to_char(data_faktury,'mm')
+order by 1,2;
+
+select * from employees;
+
+select department_id,manager_id,count(*)
+from employees
+group by department_id,manager_Id
+order by 1,2;
+
+
+select department_id,manager_id,count(*)
+from employees
+group by rollup(department_id,manager_Id);
+
+
+/*20.
+Wyswietl srednie zarobki zaokraglone do 2 miejsc po przecinku w podziale najpierw na departamenty a nastepnie
+na rok zatrudnienia.
 */
