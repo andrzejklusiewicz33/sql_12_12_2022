@@ -766,3 +766,4 @@ zarobkami danego goœcia a œrednia zarobkow w calej firmie. Wynik posortuj tak by
 zarabiajace.
 */
 
+--dupa
