@@ -641,4 +641,36 @@ srednia zarobkow jest wyzsza od sredniej zarobkow w calej firmie.
 select department_id,count(*) 
 from employees
 group by department_Id
-having avg(salary)>();
+having avg(salary)>(select avg(salary) from employees);
+
+select avg(salary) from employees;
+
+--przerwa obiadowa do 14:07
+
+
+select * from employees where department_id in (10,20,30);
+
+select department_id,
+avg(salary) srednia_departament,
+(select avg(salary) from employees) srednia_firma
+from employees
+group by department_Id
+having avg(salary)>(select avg(salary) from employees);
+
+select * from employees where department_id in ();
+
+select department_id
+from employees
+group by department_Id
+having avg(salary)>(select avg(salary) from employees);
+
+select * from employees where department_id in (    
+    select department_id
+    from employees
+    group by department_Id
+    having avg(salary)>(select avg(salary) from employees)
+);
+
+/*24.
+Wyœwietl osoby pracujace w departamentach liczniejszych niz 1 osobowe
+*/
