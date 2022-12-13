@@ -767,3 +767,32 @@ zarabiajace.
 */
 
 --dupa
+
+select employee_Id,last_name,salary,
+(select avg(salary) from employees) 
+from employees;
+
+
+select employee_Id,last_name,salary,
+(select round(avg(salary)) from employees) 
+from employees;
+
+
+select employee_Id,last_name,salary,
+round((select avg(salary) from employees))
+from employees;
+
+select employee_Id,last_name,salary,
+(select round(avg(salary)) from employees) srednia, 
+salary-(select round(avg(salary)) from employees) roznica_do_sredniej
+from employees
+order by salary desc;
+
+
+/*30.
+Wyœwietl numery departamentów, œrednie zarobki w nich, ró¿nicê pomiêdzy œrednimi zarobkami w departamencie a œrednimi zarobkami w firmie.
+Interesuja nas tylko departamenty w ktorych srednia zarobkow jest wyzsza niz srednia zarobkow w firmie. Wynik posortuj tak by na 
+poczatku byly dzialy o najwyzszej sredniej zarobkow. Kolumnom nadaj aliasy.
+*/
+
+--klusiewicz@jsystems.pl
