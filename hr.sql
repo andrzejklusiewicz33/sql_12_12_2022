@@ -622,5 +622,19 @@ które zarabiaja wiecej niz wynosi srednia w firmie. Wyeliminuj tez prezesa z wyn
 malejaco wg stazu pracy a kolumnom nadaj aliasy.
 */
 select
-employee_id,last_name,hire_date-(select min(hire_date) from employees)
-from employees;
+employee_id,last_name
+,hire_date-(select min(hire_date) from employees) roznica_od_pierwszego
+,to_char(hire_date,'dd-mm-yyyy') data_zatrudnienia
+,(select to_char(min(hire_date),'dd-mm-yyyy') from employees) zatrudnienie_pierwszego
+from employees
+where salary>(select avg(salary) from employees)
+and manager_id is not null
+order by hire_date desc;
+
+/*23.
+Wyœwietl departamenty oraz ilosc pracownikow w nich. 
+
+Interesuja nas tylko departamenty w ktorych
+srednia zarobkow jest wyzsza od sredniej zarobkow w calej firmie.
+*/
+
