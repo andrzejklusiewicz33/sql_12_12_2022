@@ -674,3 +674,25 @@ select * from employees where department_id in (
 /*24.
 Wyœwietl osoby pracujace w departamentach liczniejszych niz 1 osobowe
 */
+
+select department_id,count(*) from employees group by department_id;
+
+select department_id,count(*) from employees group by department_id having count(*)>1;
+
+select department_id from employees group by department_id having count(*)>1;
+
+select * from employees where department_id in
+    (
+    select department_id from employees group by department_id having count(*)>1
+    );
+
+
+select * from departments;
+
+select * from employees where employee_id in (select manager_id from departments);
+
+/*25.
+ Wyœwietl pracowników którzy sa przelozonymi innych pracownikow. Employee_id tych pracownikow 
+pojawia sie w wartosciach kolumny manager_id innych pracownikow.
+*/
+select * from employees;
