@@ -858,3 +858,17 @@ group by department_id;
 Wyœwietl nazwiska,zarobki, numery departamentów i stosunek zarobków danego goœcia do sumy zarobków w departamencie 
 w którym pracuje.
 */
+
+select last_name,salary,department_id,
+(select sum(salary) from employees where department_id=90)
+from employees;
+
+
+select last_name,salary,department_id,
+salary/(select sum(salary) from employees where department_id=zewn.department_id)
+from employees zewn;
+
+
+select last_name,salary,department_id,
+round(salary/(select sum(salary) from employees where department_id=zewn.department_id),2)*100||'%' stusunek_do_sumy_departament
+from employees zewn;
