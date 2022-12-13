@@ -593,3 +593,31 @@ King|20000|5
 King|20000|5%
 */
 
+select last_name,salary,(select sum(salary) from employees),
+round((salary/(select sum(salary) from employees))*100,2)||'%'
+from employees;
+
+select last_name,salary,(select sum(salary) from employees),
+to_char(round((salary/(select sum(salary) from employees))*100,2),'0.99' )||'%'
+from employees;
+
+
+select to_char(max(hire_date),'yyyy') from employees;
+
+/
+
+select last_name,salary,
+salary-(select avg(salary) from employees),
+hire_date,
+hire_date-(select min(hire_date) from employees)
+from employees;
+
+select * from employees where hire_date=(select min(hire_date) from employees);
+
+/*22.
+Wyœwietl numery pracownikow, nazwiska, ilosc dni od zatrudnienia pierwszego pracownika w calej firmie do 
+zatrudnienia tego pracownika, datê zatrudnienia danego pracownika w formacie dd-mm-yyyy, datê zatrudnienia
+pierwszego pracownika w calej firmie w formacie dd-mm-yyyy. W wyniku powinny pojawic sie tylko te osoby
+które zarabiaja wiecej niz wynosi srednia w firmie. Wyeliminuj tez prezesa z wyniku. Calosc posortuj 
+malejaco wg stazu pracy a kolumnom nadaj aliasy.
+*/
