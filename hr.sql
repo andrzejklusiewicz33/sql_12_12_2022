@@ -404,3 +404,40 @@ SELECT SUM(SALARY) FROM EMPLOYEES WHERE HIRE_DATE<TO_DATE('01-01-2001','DD-MM-YY
 SELECT SUM(SALARY) FROM EMPLOYEES WHERE TO_CHAR(HIRE_DATE,'YYYY') NOT BETWEEN 2001 AND 2005;
 SELECT SUM(SALARY) FROM EMPLOYEES WHERE TO_CHAR(HIRE_DATE,'YYYY')>2005 OR TO_CHAR(HIRE_DATE,'YYYY')<2001;
 
+
+
+
+--avg,MAX,MIN,SUM,COUNT
+
+SELECT * FROM EMPLOYEES;
+SELECT DISTINCT DEPARTMENT_ID FROM EMPLOYEES;
+
+SELECT DEPARTMENT_ID,AVG(SALARY) FROM EMPLOYEES GROUP BY DEPARTMENT_ID;
+SELECT DISTINCT DEPARTMENT_ID,AVG(sALARY) FROM EMPLOYEES;  --FUUUU
+SELECT DEPARTMENT_ID,round(AVG(SALARY)),max(salary)-min(salary),count(*) FROM EMPLOYEES GROUP BY DEPARTMENT_ID order by 1;
+
+
+select last_name,count(*) from employees group by last_name order by 2 desc;
+select to_char(hire_date,'d') ,count(*) from employees group by to_char(hire_date,'d') order by 1; 
+
+
+
+/*17.
+Wyœwietl numery departamentów i ró¿nicê w pelnych dniach pomiedzy zatrudnieniem pierwszego i ostatniego
+pracownika w ramach danego departamentu.
+*/
+
+select department_id,max(hire_date)-min(hire_date) from employees group by department_id;
+select department_id,trunc(max(hire_date)-min(hire_date)) from employees group by department_id;
+
+select department_id,max(hire_date)-min(hire_date) from employees group by department_id order by 1 desc nulls last;
+
+select * from employees;
+
+update  employees set first_name=' ' where employee_id>204;
+select * from employees;
+
+select first_name,replace(first_name,' ',null) from employees order by replace(first_name,' ',null) desc nulls last;
+select first_name,replace(first_name,' ',null) from employees order by replace(first_name,' ',null) asc nulls last;
+
+
