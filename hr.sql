@@ -621,3 +621,6 @@ pierwszego pracownika w calej firmie w formacie dd-mm-yyyy. W wyniku powinny poj
 które zarabiaja wiecej niz wynosi srednia w firmie. Wyeliminuj tez prezesa z wyniku. Calosc posortuj 
 malejaco wg stazu pracy a kolumnom nadaj aliasy.
 */
+select
+employee_id,last_name,hire_date-(select min(hire_date) from employees)
+from employees;
