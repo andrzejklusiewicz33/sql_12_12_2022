@@ -441,3 +441,39 @@ select first_name,replace(first_name,' ',null) from employees order by replace(f
 select first_name,replace(first_name,' ',null) from employees order by replace(first_name,' ',null) asc nulls last;
 
 
+create table trigerowa(
+ id integer,
+ data_czegos date
+);
+
+insert into trigerowa values (1,sysdate);
+insert into trigerowa values (2,sysdate);
+insert into trigerowa values (3,sysdate);
+insert into trigerowa values (1000,sysdate);
+select id,to_char(data_czegos,'dd-mm-yyyy hh24:mi:ss') from trigerowa;
+
+create or replace trigger datoulepszacz 
+before insert on trigerowa
+for each row
+begin
+:new.data_czegos:=trunc(:new.data_czegos,'day')+1;
+end;
+
+update trigerowa set data_czegos=trunc(data_czegos,'day')+1;
+
+
+
+create or replace function vat23(x number)  return number is
+begin
+return round(x*1.23,2);
+end;
+
+select salary,vat23(salary) from employees;
+
+/*
+18. wyœwietl rok zatrudnienia i ilosc osob zatrudnionych w danym roku. Wynik posortuj po roku
+
+2001 13
+2002 5
+
+*/
