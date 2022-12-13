@@ -638,3 +638,7 @@ Interesuja nas tylko departamenty w ktorych
 srednia zarobkow jest wyzsza od sredniej zarobkow w calej firmie.
 */
 
+select department_id,count(*) 
+from employees
+group by department_Id
+having avg(salary)>();
