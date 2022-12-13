@@ -477,3 +477,30 @@ select salary,vat23(salary) from employees;
 2002 5
 
 */
+/
+select to_char(hire_date,'yyyy') from employees group by to_char(hire_date,'yyyy');
+select to_char(hire_date,'yyyy'),count(*) from employees group by to_char(hire_date,'yyyy');
+select to_char(hire_date,'yyyy'),count(*) from employees group by to_char(hire_date,'yyyy') order by 1;
+
+select to_char(hire_date,'yyyy'),count(*) from employees group by to_char(hire_date,'yyyy') order by to_char(hire_date,'yyyy');
+
+
+select count(*) from employees where department_id=50;
+
+select department_id,count(*) from employees group by department_id;
+
+select department_id,count(*) from employees where manager_id=100 group by department_id;
+
+select department_id,count(*) from employees  group by department_id having count(*)>1;
+
+select department_id,count(*) from employees  group by department_id having avg(salary)>3000;
+
+select department_id,count(*) from employees  group by department_id having avg(salary)>3000 order by 2;
+
+/*19. 
+Wyswietl grupy pracownikow wg. roku zatrudnienia a obok roku zatrudnienia wyswietl 
+sumê zarobkow wsrod osob zatrudnionych w danym roku.
+Interesuja nas tylko grupy ktore maja sumê zarobkow wieksza niz 30000. Wynik posortuj
+malejaco wg. sumy zarobkow a kolumnom nadaj aliasy.
+
+*/
