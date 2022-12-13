@@ -710,3 +710,15 @@ select * from employees where employee_id not in (select manager_id from employe
 /*26.
 Wyœwietl goœci którzy nie sa managerami ani innych pracownikow ani zadnego z departamentow.
 */
+
+select * from employees 
+where employee_id not in (select manager_id from employees where manager_id is not null)
+and employee_id not in (select manager_Id from departments where manager_id is not null);
+
+/*27.
+Wyœwietl powiêkszone imiê i nazwisko w jednej kolumnie z aliasem, miesiac i rok zatrudnienia, wysokoœæ wynagrodzenia,
+wysokoœæ prowizji jako iloczyn wynagrodzenia i kolumny commission_pct przyciete do centow
+- w tej kolumnie zamiast ewentualnego nulla
+chcemy wyswietlic zero. W wyniku chcemy wyœwietliæ tylko osoby zatrudnione w drugiej polowie roku.
+
+*/
