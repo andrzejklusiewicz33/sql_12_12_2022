@@ -720,5 +720,24 @@ Wyœwietl powiêkszone imiê i nazwisko w jednej kolumnie z aliasem, miesiac i rok 
 wysokoœæ prowizji jako iloczyn wynagrodzenia i kolumny commission_pct przyciete do centow
 - w tej kolumnie zamiast ewentualnego nulla
 chcemy wyswietlic zero. W wyniku chcemy wyœwietliæ tylko osoby zatrudnione w drugiej polowie roku.
+*/
+select upper(first_name||' '||last_name) imie_nazwisko 
+,to_char(hire_date,'mm-yyyy') zatrudnienie
+,salary
+,nvl(trunc(salary*commission_pct,2),0) prowizja
+from employees
+where to_char(hire_date,'mm')>6;
 
+
+
+select upper(first_name||' '||last_name) imie_nazwisko 
+,to_char(hire_date,'mm-yyyy') zatrudnienie
+,salary
+,trunc(salary*nvl(commission_pct,0),2) prowizja
+from employees
+where to_char(hire_date,'mm')>6;
+
+/*28.
+Wyœwietl poszczególne lata zatrudnienia,liczbe pracownikow zatrudnionych w danym roku, srednia zarobkow w danym roku przycieta do centow,
+roznicê pomiêdzy najwy¿szymi i najni¿szymi zarobkami wœród osób zatrudnionych w danym roku. Do obliczeñ nie chcemy braæ pod uwagê prezesa.
 */
