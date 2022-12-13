@@ -796,3 +796,65 @@ poczatku byly dzialy o najwyzszej sredniej zarobkow. Kolumnom nadaj aliasy.
 */
 
 --klusiewicz@jsystems.pl
+
+
+create or replace view raport1 as 
+select employee_Id,last_name,salary,
+(select round(avg(salary)) from employees) srednia, 
+salary-(select round(avg(salary)) from employees) roznica_do_sredniej
+from employees
+order by salary desc;
+
+
+select * from raport1;
+
+select department_id
+,round(avg(salary)) srednia_departament
+,round(avg(salary)-(select avg(salary) from employees)) roznica_srednich
+from employees
+group by department_Id
+having avg(salary)>(select avg(salary) from employees)
+order by 2 desc;
+
+select last_name,manager_id
+,(select count(*) from employees where manager_id=e.manager_id)
+from employees e;
+
+select last_name,department_id
+,(select sum(salary) from employees where department_id=e.department_id)
+from employees e;
+
+
+select last_name,department_id
+,(select sum(salary) from employees where department_id=90)
+from employees e;
+
+select last_name,department_name from employees join departments using(department_id);
+
+select
+last_name
+,(select department_name from departments where department_id=e.department_id)
+from employees e;
+/
+
+
+
+select koza.last_name,koza.department_id
+,(select sum(salary) from employees where department_id=koza.department_id)
+,(select sum(salary) from employees)
+from employees koza;
+
+
+select department_id,sum(salary) 
+from employees
+group by department_id;
+
+
+select last_name,department_id,sum(salary) --fuuuuu
+from employees
+group by department_id;
+
+/*31.
+Wyœwietl nazwiska,zarobki, numery departamentów i stosunek zarobków danego goœcia do sumy zarobków w departamencie 
+w którym pracuje.
+*/
