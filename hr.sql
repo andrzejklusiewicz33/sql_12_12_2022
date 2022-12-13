@@ -538,3 +538,58 @@ group by rollup(department_id,manager_Id);
 Wyswietl srednie zarobki zaokraglone do 2 miejsc po przecinku w podziale najpierw na departamenty a nastepnie
 na rok zatrudnienia.
 */
+
+select department_id,to_char(hire_date,'yyyy'),round(avg(salary),2)
+from employees
+group by  department_id,to_char(hire_date,'yyyy')
+order by 1,2;
+/
+
+--przerwa do 12:39
+
+
+select lasT_name,salary from employees;
+select avg(salary) from employees;
+
+select lasT_name,salary,(select avg(salary) from employees)
+from employees;
+
+
+select lasT_name,salary,(select avg(salary) from employees)
+,salary-(select avg(salary) from employees)
+from employees;
+
+
+select lasT_name,salary,department_id,(select avg(salary) from employees where department_id=e.department_Id)
+from employees e;
+
+
+select lasT_name,salary,(select avg(salary) from employees)
+,salary-(select avg(salary) from employees)
+from employees;
+
+
+select last_name,hire_date
+,hire_date-(select min(hire_date) from employees)
+from employees;
+/
+
+select last_name,hire_date
+,hire_date-min(hire_Date) ---fuuuuu
+from employees;
+
+select min(hire_date) from employees where department_id=90;
+
+select last_name,hire_date
+,hire_date-(select min(hire_date) from employees),min(hire_date) over ()
+from employees where department_id=90;
+
+select months_between(max(hire_date),min(hire_date))/12 from employees;
+/*21.
+Wyswietl nazwiska, zarobki oraz stosunek zarobkow danego goscia do sumy zarobkow w calej firmie wyrazone 
+procentowo.
+King|20000|0.05
+King|20000|5
+King|20000|5%
+*/
+
