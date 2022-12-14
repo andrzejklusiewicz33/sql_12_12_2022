@@ -979,3 +979,24 @@ select * from employees join departments using(department_id) join locations usi
 /*36.
 Wyœwietl nazwy zawodów i liczbê pracowników je wykonujacych
 */
+
+select * from employees join jobs using(job_id);
+
+select job_title,count(*)
+from employees join jobs using(job_id)
+group by job_title;
+
+select * from employees join departments using(department_id) join locations using(location_id) join jobs using(job_Id);
+
+select last_name,department_name,city,job_title from employees join departments using(department_id) join locations using(location_id) join jobs using(job_Id);
+select last_name,department_name,city,job_title from employees join jobs using(job_Id) join departments using(department_id) join locations using(location_id) ;
+
+select * from locations;
+
+select last_name,e.department_id from employees e join departments d on e.department_id=d.department_id;
+
+/*37.
+Wyœwietl nazwy miast i iloœæ pracowników w nich. Wynik posortuj malejaco wg. ilosci pracownikow
+*/
+
+select * from locations;
