@@ -999,4 +999,10 @@ select last_name,e.department_id from employees e join departments d on e.depart
 Wyœwietl nazwy miast i iloœæ pracowników w nich. Wynik posortuj malejaco wg. ilosci pracownikow
 */
 
-select * from locations;
+select * from employees join departments using(department_id) join locations using(location_id);
+select city,count(*) ilosc_pracownikow from employees join departments using(department_id) join locations using(location_id) group by city order by 2 desc;
+
+/*38.
+Wyswietl nazwy departamentów, zaokraglone do jednostek bez czesci ulamkowej srednie zarobki w tych departamentach,
+srednie zarobki w firmie, roznice pomiedzy srednimi zarobkami w departamencie a srednimi zarobkami w firmie.
+*/
