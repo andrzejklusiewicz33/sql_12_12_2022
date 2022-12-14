@@ -1293,3 +1293,31 @@ delete from regions where region_id=27;
 /*45.
 Skasuj trwale te lokalizacje w których nie ma zadnych departamentow.
 */
+
+delete from locations where location_id not in (select location_id from departments where location_id is not null);
+rollback;
+
+create table samochody(
+    id_samochodu integer primary key,
+    marka varchar2(4000) not null,
+    model varchar2(4000) not null,
+    rejestracja varchar2(4000) not null unique check (length(rejestracja)>3 and length(rejestracja)<10),
+    id_kierowcy integer references employees(employee_id)
+);
+
+insert into samochody values (1,'Renault','Kadjar','WY722CP',100);
+select * from samochody s join employees e on s.id_kierowcy=e.employee_id;
+
+create table regiony (
+id_regionu integer primary key,
+nazwa varchar2(4000)
+);
+
+insert into regiony select region_id,region_name from regions;
+select * from regiony;
+
+/*46.
+*.  Stwórz tabelê dane_kontaktowe z polami: klucz glowny, imie,nazwisko, email,telefon
+a nastepnie przepompuj do niej dane z tabeli employees (tylko wybrane pola).
+
+*/
