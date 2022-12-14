@@ -1256,3 +1256,40 @@ departments uzupelniajac kolumny department_id, department_name i location_id
 
 create table departments_slawek as select * from departments;
 select *  FROM DEPARTMENTS;
+select * from locations;
+
+create sequence dep_seq start with 280 increment by 10;
+insert into departments(department_id,department_name,location_id) values (dep_seq.nextval,'Zamieszanie i ba³agan',1200);
+insert into departments values (dep_seq.nextval,'Zamieszanie i ba³agan',null,1200);
+select * from locations;
+
+delete from departments where department_id=280;
+commit;
+select *  FROM DEPARTMENTS;
+delete from departments;
+
+select * from regions;
+insert into regions values (5,'Australia');
+insert into regions values (6,'Arctica');
+commit;
+
+select * from countries;
+
+delete from regions where region_id not in (select region_id from countries where region_id is not null);
+
+select * from regions;
+
+drop table abc;
+
+
+select * from countries;
+insert into countries values ('NW','Nowy',27);
+commit;
+
+delete from regions where region_id=27;
+
+/
+
+/*45.
+Skasuj trwale te lokalizacje w których nie ma zadnych departamentow.
+*/
