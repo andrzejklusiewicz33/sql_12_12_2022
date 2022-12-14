@@ -1032,3 +1032,28 @@ select department_id,manager_id, count(*)
 from employees 
 group by department_id,manager_id 
 order by 1,2;
+
+select * from employees join departments using(department_id);
+
+select department_name,to_char(hire_date,'yyyy') ,count(*)
+from employees join departments using(department_id)
+group by  department_name,to_char(hire_date,'yyyy')
+order by 1,2;
+
+select * from employees where department_id is null;
+select * from departments where department_id not in (select department_id from employees where department_id is not null);
+select * from employees join departments using(department_id);
+select count(*) from employees;
+select * from employees e join departments d on e.department_id=d.department_id;
+
+select * from employees left outer join departments using(department_id) order by department_id;
+select * from employees left join departments using(department_id) order by department_id;
+select * from employees right outer join departments using(department_id) order by department_id;
+select * from employees right join departments using(department_id) order by last_name;
+select * from employees full outer join departments using(department_id) order by last_name;
+select * from employees full join departments using(department_id) order by last_name;
+
+/*40.
+Wyœwietl miasta i nazwy departamentów w nich, w taki sposob by wyswietlic rowniez miasta 
+w ktorych nie ma zadnych departamentow
+*/
