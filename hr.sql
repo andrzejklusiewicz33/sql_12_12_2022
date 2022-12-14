@@ -1078,7 +1078,69 @@ Z wyniku wyeliminuj prezesa, nie chcemy tez osob ktore nie maja przypisanego zad
 Wynik posortuj malejaco wg. stazu pracy, a gdyby byly dwie osoby zatrudnione tego samego dnia to alfabetycznie po nazwisku rosnaco.
 */
 
+select first_name imie,last_name nazwisko,to_char(hire_date,'dd-mm-yyyy')  zatrudnienie
+,trunc(months_between(sysdate,hire_date)/12) staz_lata
+,department_name,city,job_title
+,salary
+,round((select avg(salary) from employees)-salary) roznica_firma
+,round((select avg(salary) from employees where department_id=e.department_Id)-salary) roznica_dzial
+from employees e
+join departments d on e.department_id=d.department_id
+join locations using(location_id)
+join jobs using(job_id)
+where e.manager_id is not null
+order by hire_date,last_name;
+
 select * from employees join departments using(department_id) join jobs using(job_id);
 
 select firsT_name,last_Name, (select avg(salary) from employees where department_id=e.department_id),department_name
 from employees e join departments d on e.department_id=d.department_id;
+
+--przerwa obiadowa do 14:35
+
+
+select * from employees where department_id=50;
+select * from employees where manageR_id=100;
+
+
+
+select * from employees where department_id=50
+union all
+select * from employees where manageR_id=100;
+
+
+select * from employees where department_id=50
+union 
+select * from employees where manageR_id=100;
+
+
+select * from employees where department_Id=50 or manager_Id=100;
+
+select * from employees where department_id=50
+intersect
+select * from employees where manageR_id=100;
+
+select * from employees where department_id=50 and manager_id=100;
+
+select * from employees where department_id=50
+minus
+select * from employees where manageR_id=100;
+
+select * from employees where manageR_id=100
+minus
+select * from employees where department_id=50;
+
+select employee_id,last_name from employees
+union all
+select department_id,department_name from departments;
+
+select employee_id kol1,last_name kol2 from employees
+union all
+select department_id,department_name from departments;
+
+/*42.
+**. Wyswietl osoby ktore sa managerami innych pracownikow ale nie sa managerami zadnego z departamentow.
+Zrealizuj na dwa sposoby:
+--operatorami zbiorowymi
+--podzapytaniami w klauzuli where
+*/
