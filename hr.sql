@@ -1302,7 +1302,8 @@ create table samochody(
     marka varchar2(4000) not null,
     model varchar2(4000) not null,
     rejestracja varchar2(4000) not null unique check (length(rejestracja)>3 and length(rejestracja)<10),
-    id_kierowcy integer references employees(employee_id)
+    id_kierowcy integer references employees(employee_id),
+    pojemnosc number
 );
 
 insert into samochody values (1,'Renault','Kadjar','WY722CP',100);
@@ -1319,5 +1320,17 @@ select * from regiony;
 /*46.
 *.  Stwórz tabelê dane_kontaktowe z polami: klucz glowny, imie,nazwisko, email,telefon
 a nastepnie przepompuj do niej dane z tabeli employees (tylko wybrane pola).
-
 */
+
+create table dane_kontaktowe(
+id_dk integer primary key,
+imie varchar2(4000) not null,
+nazwisko varchar2(4000) not null,
+email varchar2(4000) not null unique,
+telefon varchar2(4000) not null unique
+);
+
+insert into dane_kontaktowe 
+select employee_Id,first_name,lasT_name,email,phone_number from employees;
+commit;
+select * from dane_kontaktowe;
