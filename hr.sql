@@ -1006,3 +1006,29 @@ select city,count(*) ilosc_pracownikow from employees join departments using(dep
 Wyswietl nazwy departamentów, zaokraglone do jednostek bez czesci ulamkowej srednie zarobki w tych departamentach,
 srednie zarobki w firmie, roznice pomiedzy srednimi zarobkami w departamencie a srednimi zarobkami w firmie.
 */
+
+select department_name
+,round(avg(salary)) srednia_departament
+,(select round(avg(salary)) from employees) srednia_firma
+,(select round(avg(salary)) from employees)-round(avg(salary)) roznica_srednich
+from employees join departments using(department_id)
+group by department_name
+order by 4 desc;
+
+
+--przerwa do 12:52
+
+/*39.
+Wyœwietl iloœæ zatrudnionych pracowników w podziale na departamenty i rok zatrudnienia. Wynik powinien wygladac 
+mniej wiecej tak:
+IT 2001 15
+IT 2002 4
+IT 2003 1
+Sales 2001 5
+Sales 2002 4
+*/
+
+select department_id,manager_id, count(*) 
+from employees 
+group by department_id,manager_id 
+order by 1,2;
