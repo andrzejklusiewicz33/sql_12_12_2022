@@ -932,3 +932,35 @@ where salary>(select avg(salary) from employees where department_id=e.department
 /*34.
 Wyœwietl osoby które zarabiaj¹ najwiecej w dziale w ktorym pracuja...
 */
+
+select * from employees where salary=(select max(salary) from employees);
+select * from employees zewn where salary=(select max(salary) from employees where department_id=zewn.department_id);
+
+--przerwa do 11:30
+
+select * from employees;
+select * from departments;
+
+select * from employees join departments on employees.department_id=departments.department_id;
+select * from employees e join departments d on e.department_id=d.department_id;
+select * from employees join departments using(department_id);
+select * from employees natural join departments; -- nie uzywac!
+select * from employees;
+select * from departments;
+select * from employees e join departments d on e.department_id=d.department_id and e.manager_id=d.manager_id;
+
+select last_name,department_name from employees join departments using(department_id);
+
+select count(*) from employees;
+select count(*) from employees join departments using(department_id);
+select * from employees where department_id is null;
+select * from employees e join departments d on e.department_id=d.department_id;
+select * from employees e join departments d on e.department_id=d.numer_departamentu;
+
+select * from employees e join departments d on e.department_id<>d.department_id;
+select * from employees e join departments d on e.department_id=d.department_id;
+
+/*35.
+Wyœwietl nazwiska i nazwy zawodow. Zawody znajduja sie w tabelce jobs
+*/
+select * from jobs;
