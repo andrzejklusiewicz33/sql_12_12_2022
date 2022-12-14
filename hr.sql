@@ -899,3 +899,13 @@ select last_name,manager_id,(select count(*) from employees where manager_id=e.m
 /*32.
 wyœwietl nazwiska,zarobki,numer departamentu i roznicê zarobkow goscia do najwyzszych zarobkow w departamencie w ktorym pracuje
 */
+
+select last_name,salary, department_id from employees;
+select last_name,salary, department_id,(select max(salary) from employees where department_id=e.department_id) from employees e;
+select last_name,salary, department_id,(select max(salary) from employees where department_id=e.department_id)-salary roznica_do_max from employees e;
+
+/*33.
+Wyœwietl nazwiska i nazwy departamentów. Skorzystaj z danych zawartych w tabelce departaments
+*/
+
+select * from departments;
