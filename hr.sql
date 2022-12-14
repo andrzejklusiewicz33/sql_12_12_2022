@@ -1043,6 +1043,7 @@ order by 1,2;
 select * from employees where department_id is null;
 select * from departments where department_id not in (select department_id from employees where department_id is not null);
 select * from employees join departments using(department_id);
+select * from employees inner join departments using(department_id);
 select count(*) from employees;
 select * from employees e join departments d on e.department_id=d.department_id;
 
@@ -1056,4 +1057,23 @@ select * from employees full join departments using(department_id) order by last
 /*40.
 Wyœwietl miasta i nazwy departamentów w nich, w taki sposob by wyswietlic rowniez miasta 
 w ktorych nie ma zadnych departamentow
+*/
+
+select department_name,city from departments right join locations using(location_id);
+select department_name,city from locations left join departments using(location_id);
+
+/*41.
+Wyswietl:
+- imie
+- nazwisko
+- data zatrudnienia w formacie dd-mm-yyyy
+- staz w pelnych latach
+- nazwa departamentu
+- miasto
+- wykonywany zawod
+- zarobki
+- roznica pomiedzy zarobkami danej osoby a srednimi zarobkami w calej firmie
+- roznica pomiedzy zarobkami danej osoby a srednimi zarobkami w departamencie w ktorym pracuje.
+Z wyniku wyeliminuj prezesa, nie chcemy tez osob ktore nie maja przypisanego zadnego departamentu lub zawodu
+Wynik posortuj malejaco wg. stazu pracy, a gdyby byly dwie osoby zatrudnione tego samego dnia to alfabetycznie po nazwisku rosnaco.
 */
