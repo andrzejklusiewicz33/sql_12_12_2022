@@ -1195,3 +1195,64 @@ Daj podwyzkê o 10 procent osobom ktore zarabiaja mniej niz srednia w calej firmi
 */
 
 create table employees_slawek as select * from employees;
+
+
+update employees set salary=salary*1.1 where salary<(select avg(salary) from employees);
+commit;
+
+--przerwa do 15:40
+
+drop table owoce;
+
+create table owoce(
+id_owocu integer primary key,
+nazwa varchar2(3000)
+);
+
+select * from owoce;
+insert into owoce values (1,'banan');
+insert into owoce values (2,'truskawka');
+commit;
+
+insert into owoce(id_owocu) values (3);
+
+create sequence sekw;
+select sekw.nextval from dual;
+
+create sequence owoce_seq start with 4;
+create sequence owoce_seq start with 4 increment by 1;
+insert into owoce values (owoce_seq.nextval,'jab³ko');
+
+create sequence moja_seq start with 1000 increment by 100;
+select moja_seq.nextval from dual;
+
+
+create or replace trigger yeti
+before insert on owoce
+for each row
+begin
+:new.id_owocu:=owoce_seq.nextval;
+end;
+
+
+insert into owoce(nazwa) values ('jakaœ wartoœæ');
+select * from owoce;
+
+create table emps as select * from employees where 1=2;
+
+select * from emps;
+insert into emps select * from employees;
+insert into emps select sekwencja.nextval,first_name,last_name ..... from employees;
+
+select owoce_seq.currval from dual;
+
+/*44.
+Stwórz sekwencjê która bêdzie sluzyla nadawaniu numeracji wierszom w tabeli departments.
+Zadbaj o to by sekwencja podala wlasciwa wartosc poczatkowa i miala zachowana konsekwencje 
+zwiekszania wartosci. Korzystajac z tej sekwencji wstaw wiersz do tabeli 
+departments uzupelniajac kolumny department_id, department_name i location_id
+
+*/
+
+create table departments_slawek as select * from departments;
+select *  FROM DEPARTMENTS;
