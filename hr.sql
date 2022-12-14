@@ -1144,3 +1144,54 @@ Zrealizuj na dwa sposoby:
 --operatorami zbiorowymi
 --podzapytaniami w klauzuli where
 */
+
+select * from employees where employee_Id in (select manageR_id from employees);
+select * from employees where employee_id in (select manager_id from departments);
+
+select * from employees where employee_Id in (select manageR_id from employees)
+minus 
+select * from employees where employee_id in (select manager_id from departments);
+
+select * from employees where employee_id in 
+(select manager_id from employees) and employee_id not in (select manager_id from departments where manager_id is not null);
+/*
+union all -- sklejenie 2 wynikow
+union -- sklejenie 2 wynikow ale z usunieciem duplikatow
+minus -- od pierwszego zbioru odejmujemy drugi
+intersect - czesc wspolna obu zbiorow
+*/
+
+/*
+update --aktualizacja
+insert --wstawianie
+delete --kasowanie
+*/
+
+update employees set salary=1000 where employee_id=100;
+select salary from employees where employee_Id=100;
+update employees set salary=salary+1000 where employee_id=100;
+update employees set salary=salary+1000,commission_Pct=0.5 where employee_id=100;
+select salary,commission_pct from employees where employee_Id=100;
+commit;
+update employees set salary=salary+10;
+rollback;
+commit;
+
+select last_name from employees where employee_id=102;
+
+update employees set last_name='Nowak' where employee_Id=102;
+commit;
+rollback;
+
+5xUpdate
+rollback;
+
+5xUpdate
+commit;
+rollback;
+
+/*43.
+Daj podwyzkê o 10 procent osobom ktore zarabiaja mniej niz srednia w calej firmie.
+*/
+
+create table employees_slawek as select * from employees;
