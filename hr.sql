@@ -872,3 +872,30 @@ from employees zewn;
 select last_name,salary,department_id,
 round(salary/(select sum(salary) from employees where department_id=zewn.department_id),2)*100||'%' stusunek_do_sumy_departament
 from employees zewn;
+
+
+select last_name,salary,department_id from employees;
+select avg(salary) from employees;
+select avg(salary) from employees where department_id=90;
+
+
+select last_name,salary,department_id,(select avg(salary) from employees) from employees;
+select last_name,salary,department_id,(select avg(salary) from employees where department_id=90) from employees;
+select last_name,salary,department_id,(select avg(salary) from employees where department_id=x) from employees;
+
+select department_id,avg(salary) from employees group by department_id;
+
+select last_name,salary,department_id,(select avg(salary) from employees where department_id=poza_nawiasem.department_id) from employees poza_nawiasem;
+select poza_nawiasem.last_name,poza_nawiasem.salary,poza_nawiasem.department_id,(select avg(salary) from employees where department_id=poza_nawiasem.department_id) 
+from employees poza_nawiasem;
+
+select employees.first_name,employees.last_name from employees;
+select e.first_name,e.last_name from employees e;
+
+select last_name,salary,department_id,(select avg(salary) from employees where department_id=poza_nawiasem.department_id) from employees poza_nawiasem;
+
+select last_name,manager_id,(select count(*) from employees where manager_id=e.manager_id) from employees e;
+
+/*32.
+wyœwietl nazwiska,zarobki,numer departamentu i roznicê zarobkow goscia do najwyzszych zarobkow w departamencie w ktorym pracuje
+*/
