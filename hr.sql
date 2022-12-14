@@ -1077,3 +1077,8 @@ Wyswietl:
 Z wyniku wyeliminuj prezesa, nie chcemy tez osob ktore nie maja przypisanego zadnego departamentu lub zawodu
 Wynik posortuj malejaco wg. stazu pracy, a gdyby byly dwie osoby zatrudnione tego samego dnia to alfabetycznie po nazwisku rosnaco.
 */
+
+select * from employees join departments using(department_id) join jobs using(job_id);
+
+select firsT_name,last_Name, (select avg(salary) from employees where department_id=e.department_id),department_name
+from employees e join departments d on e.department_id=d.department_id;
