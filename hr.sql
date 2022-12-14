@@ -964,3 +964,18 @@ select * from employees e join departments d on e.department_id=d.department_id;
 Wyœwietl nazwiska i nazwy zawodow. Zawody znajduja sie w tabelce jobs
 */
 select * from jobs;
+
+select last_name,job_title from employees join jobs using(job_id);
+select last_name,job_title from jobs join employees using(job_id);
+select last_name,job_title from employees e join jobs j on e.job_id=j.job_id;
+
+select * from employees join departments using(department_id);
+
+select department_name,avg(salary),count(*) from employees join departments using(department_id) 
+group by department_name;
+
+select * from employees join departments using(department_id) join locations using(location_id) join countries using(country_id);
+
+/*36.
+Wyœwietl nazwy zawodów i liczbê pracowników je wykonujacych
+*/
