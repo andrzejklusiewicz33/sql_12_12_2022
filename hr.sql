@@ -909,3 +909,26 @@ Wyœwietl nazwiska i nazwy departamentów. Skorzystaj z danych zawartych w tabelce
 */
 
 select * from departments;
+
+-- klusiewicz@jsystems.pl
+--OCA + OCP, SQL Expert
+
+
+select last_name, salary
+from employees 
+where salary>(select avg(salary) from employees);
+
+
+select last_name, salary, (select round(avg(salary)) from employees) srednia
+from employees 
+where salary>(select avg(salary) from employees);
+
+
+select last_name, salary,department_id,(select round(avg(salary)) from employees where department_id=e.department_id) srednia_departament
+from employees e
+where salary>(select avg(salary) from employees where department_id=e.department_id);
+
+
+/*34.
+Wyœwietl osoby które zarabiaj¹ najwiecej w dziale w ktorym pracuja...
+*/
