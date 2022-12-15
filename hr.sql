@@ -1724,3 +1724,5 @@ Z ci¹gu " fgsfsf@fdsff-pl @11a biuro@jsystems.pl aaddda"  wyci¹gnij przy u¿yciu 
 Zalozenie jest takie ze email moze byc np. w domenie jsystems.com.pl albo jsystems.pl a poczatek maila moze byc np. andrzej.klusiewicz@
 lub np. andrzej_klusiewicz@
 */
+
+select regexp_substr('fgsfsf@fdsff-pl @11a biuro@jsystems.pl aaddda','[[:alpha:]]@[[:alpha:]]') from dual;
