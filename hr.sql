@@ -1470,3 +1470,7 @@ miejsce w rankingu --funkcje analityczne
 srednich zarobkow w departamentach, roznicê pomiedzy srednimi zarobkami w danym departamencie a srednimi zarobkami
 w departamencie o wiersz wyzej w rankingu.
 */
+
+select department_name,round(avg(salary))
+from employees join departments using(department_id)
+group by department_Name;
