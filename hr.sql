@@ -1425,3 +1425,33 @@ from employees;
 Wyswietl nazwiska, rok zatrudnienia i z uzyciem funkcji analitycznej srednia zarobkow wsrod osob zatrudnionych w 
 tym samym roku. Srednia zaokraglij do 2 miejsc po przecinku a kolumnom nadaj aliasy.
 */
+
+select last_name,salary,to_char(hire_date,'yyyy') rok_zatrudnienia
+,round(avg(salary) over (partition by to_char(hire_date,'yyyy')),2) srednia_dla_roku
+from employees;
+
+--przerwa do 11:12
+
+select employee_id 
+,lag(employee_id) over(order by employee_id)
+from employees;
+
+
+select employee_id 
+,lag(employee_id,12) over(order by employee_id)
+from employees;
+
+
+select employee_id 
+,lead(employee_id) over(order by employee_id)
+from employees;
+
+
+select employee_id 
+,lead(employee_id,12) over(order by employee_id)
+from employees;
+
+/*50.
+Wyœwietl nazwiska, zarobki, miejsce w rankingu zarobkow (1 miejsce zajmuje najlepiej zarabiajacy)
+i roznicê pomiedzy zarobkami danego goscia a zarobkami goscia wiersz wyzej w rankingu zarobkow.
+*/
