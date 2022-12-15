@@ -1471,6 +1471,44 @@ srednich zarobkow w departamentach, roznicê pomiedzy srednimi zarobkami w danym 
 w departamencie o wiersz wyzej w rankingu.
 */
 
-select department_name,round(avg(salary))
+select department_name,round(avg(salary)) srednia
+,dense_rank() over(order by avg(salary) desc) ranking
+,lag(round(avg(salary))) over(order by avg(salary) desc) - round(avg(Salary)) roznica_wyzej
 from employees join departments using(department_id)
 group by department_Name;
+
+
+/*
+preceding - ilosc poprzedzajacych (od góry)
+following - iloœæ nastêpuj¹cych (od dolu)
+current row - bie¿¹cy wiersz
+unbounded - bez ograniczen w dana stronê
+*/
+select last_name,salary, sum(salary) over() from employees;
+select employee_id,last_name,salary
+, sum(salary) over(order by employee_Id rows between unbounded preceding and current row)
+from employees;
+
+
+select employee_id,last_name,salary
+, sum(salary) over(order by employee_Id rows between unbounded preceding and unbounded following)
+from employees;
+
+select employee_id,last_name,salary
+, sum(salary) over(order by employee_Id rows between current row and unbounded following)
+from employees;
+
+select employee_id,last_name,salary
+, avg(salary) over(order by employee_Id rows between 3 preceding and 3 following)
+from employees;
+
+
+/*52.
+Stwórz tabelkê która bêdzie zawierala klucz glowny, numer miesiaca i kwotê bilansu jako kolumny.
+Wszystkie kolumny maja miec wlasnosc wymuszaca wstawienie wartosci (czyli nie moze byc null).
+Dodaj sekwencjê i korzystajac z niej wstaw 12 wierszy  - po jednym dla kazdego miesiaca z jakims wymyslonym bilansem.
+Wyswietl miesiace, bilanse dla kazdego miesiaca , sumê bilansów od poczatku roku do danego miesiaca,
+srednia bilansow zaokraglona od poczatku roku do danego miesiaca , miejsce w rankingu bilansow danego miesiaca 
+wzgledem calego roku, roznice pomiedzy bilansem  w danym miesiacu a poprzedzajacym miesiacu.
+Caly wynik powinien byc posortowany wzgledem numeru miesiaca, a kolumny powinny miec aliasy
+*/
