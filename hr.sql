@@ -1538,3 +1538,19 @@ insert into wyniki_finansowe values (wf.nextval,12,-250670);
 commit;
 
 select * from wyniki_finansowe;
+
+/*
+Wyswietl miesiace, bilanse dla kazdego miesiaca , sumê bilansów od poczatku roku do danego miesiaca,
+srednia bilansow zaokraglona od poczatku roku do danego miesiaca , miejsce w rankingu bilansow danego miesiaca 
+wzgledem calego roku, roznice pomiedzy bilansem  w danym miesiacu a poprzedzajacym miesiacu.
+Caly wynik powinien byc posortowany wzgledem numeru miesiaca, a kolumny powinny miec aliasy
+*/
+
+select wf.*
+,sum(bilans) over(order by miesiac rows between unbounded preceding and current row) suma_kroczaca
+,round(avg(bilans) over(order by miesiac rows between unbounded preceding and current row)) srednia_kroczaca
+,dense_rank() over(order by bilans desc) ranking
+,bilans-lag(bilans) over (order by miesiac) roznica_miesiac_przed
+from wyniki_finansowe wf
+order by miesiac;
+/
