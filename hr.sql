@@ -1605,3 +1605,47 @@ update, podzapytania skorelowanego i flashback query.
 update employees e set last_name=(last_name tego goscia jakis czas temu)
 
 select lasT_name from employees as of timestamp sysdate-1/24 where employee_id=100;
+
+update employees e set last_name=(select lasT_name from employees as of timestamp sysdate-1/24 where employee_id=100)
+select * from employees;
+
+update employees e set last_name=(select lasT_name from employees as of timestamp sysdate-1/24 where employee_id=e.employee_id);
+commit;
+
+
+select lasT_name,salary, commission_pct,department_id,
+case department_id
+when 50 then 'dzial sprzedazy'
+when 90 then 'zarzad'
+when 60 then 'it'
+else 'coœ innego'
+end warunek
+from employees;
+
+
+
+select lasT_name,salary, commission_pct,department_id,
+case 
+when commission_pct is null then 'brak prowizji'
+else 'prowizja '||commission_pct
+end case
+from employees;
+/
+
+
+select lasT_name,salary, commission_pct,department_id,
+case 
+when manager_id is null then 'prezes'
+when department_id=90 then 'zarzad'
+when salary>=10000 then 'dobrze zarabiajacy'
+when salary>=5000 then 'srednio zarabiajacy'
+else 'slabo zarabiajacy bez przywilejow'
+end warunek
+from employees;
+
+select * from employees where manager_id is null;
+
+/*54.
+Wyswietl imiona, nazwiska, zarobki,zaokraglona srednia w calej firmie i kolumne w ktorej pojawi sie albo "powyzej sredniej"
+albo "ponizej sredniej" w zaleznosci od tego czy dany gosc zarabia mniej czy wiecej niz wynosi srednia w firmie.
+*/
