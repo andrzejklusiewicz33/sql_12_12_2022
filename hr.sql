@@ -1370,3 +1370,58 @@ from employees;
 /*48.
   Wyœwietl nazwisko, rok zatrudnienia, ranking wzgledem zarobkow tak by kazdy rok zatrudnienia mial swoj osobny ranking.
 */
+
+select last_name,to_char(hire_date,'yyyy') 
+,dense_rank() over(partition by to_char(hire_date,'yyyy') order by salary desc)
+from employees;
+/
+
+select last_name,salary from employees;
+select last_name,salary,(select avg(salary) from employees), avg(salary) over() from employees;
+
+select last_name,salary,department_id,
+(select avg(salary) from employees where department_id=e.department_id), 
+avg(salary) over(partition by department_id) 
+from employees e;
+
+
+select last_name,salary
+,(select count(*) from employees)
+,count(*) over() 
+from employees;
+
+
+
+select last_name,salary
+,(select count(*) from employees)
+,count(*) over() 
+from employees where department_id=90;
+
+select employee_id,department_id,salary, dense_rank() over(order by salary desc) from employees where department_id=20;
+
+select 
+department_Id,sum(salary),sum(sum(salary)) over() 
+from employees 
+group by department_id;
+
+select salary,department_id,
+count(*) over(),
+sum(salary) over(),
+max(hire_date) over(),
+min(hire_date) over(),
+avg(salary) over()
+from employees;
+
+
+select salary,department_id,
+count(*) over(partition by department_Id),
+sum(salary) over(partition by department_Id),
+max(hire_date) over(partition by department_Id),
+min(hire_date) over(partition by department_Id),
+avg(salary) over(partition by department_Id)
+from employees;
+
+/*49.
+Wyswietl nazwiska, rok zatrudnienia i z uzyciem funkcji analitycznej srednia zarobkow wsrod osob zatrudnionych w 
+tym samym roku. Srednia zaokraglij do 2 miejsc po przecinku a kolumnom nadaj aliasy.
+*/
