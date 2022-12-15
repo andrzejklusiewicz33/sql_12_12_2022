@@ -1698,3 +1698,19 @@ select regexp_replace('dupa dupa dupa 1111 dupa dupa dupa 22 000 00 00 dupa dupa
 /*55.
 Wyœwietl osoby majace dwuczlonowe nazwisko za pomoc¹ regexp_like
 */
+
+select  * from employees where regexp_like(last_name,'.* .*');
+select  * from employees where regexp_like(last_name,'[[:alpha:]]* [[:alpha:]]*');
+select  * from employees where regexp_like(last_name,'[[:alpha:]]{1,} [[:alpha:]]{1,}');
+select * from employees where last_name like '% %';
+select * from employees;
+update employees set last_name='Twoj Stary' where employee_id=100;
+commit;
+
+/*56.
+*. Wyœwietl osoby ktore maja w numerze telefonu co najmniej 13 cyfr
+*/
+
+select * from employees;
+
+--regexp_count w where ....
