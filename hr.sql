@@ -1601,3 +1601,7 @@ commit;
 Nastepnie przywroc stan kolumny last_name do stanu przed zmiana korzystajac z 
 update, podzapytania skorelowanego i flashback query.
 */
+
+update employees e set last_name=(last_name tego goscia jakis czas temu)
+
+select lasT_name from employees as of timestamp sysdate-1/24 where employee_id=100;
