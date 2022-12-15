@@ -1649,3 +1649,52 @@ select * from employees where manager_id is null;
 Wyswietl imiona, nazwiska, zarobki,zaokraglona srednia w calej firmie i kolumne w ktorej pojawi sie albo "powyzej sredniej"
 albo "ponizej sredniej" w zaleznosci od tego czy dany gosc zarabia mniej czy wiecej niz wynosi srednia w firmie.
 */
+
+select first_name,last_name,salary
+,(select round(avg(salary)) from employees) srednia_firma
+,case 
+when salary>(select avg(salary) from employees)  then 'powyzej sredniej'
+else 'ponizej sredniej'
+end case
+from employees;
+
+--przerwa obiadowa do 14:45
+/*
+regexp_substr --wycinanie
+regexp_instr  --okreslanie pozycji
+regexp_like  --czy zawiera wzorzec
+regexp_count --ilosc wystapien wzorca
+regexp_replace -- podmienia elementy pasujace do wzorca
+*/
+
+
+select regexp_substr('sia³a baba mak i dosta³a 10 lat bo nie p³aci³a vat','.') from dual;
+select regexp_substr('sia³a baba mak i dosta³a 10 lat bo nie p³aci³a vat','[[:digit:]]') from dual;
+select regexp_substr('sia³a baba mak i dosta³a 10 lat bo nie p³aci³a vat','[[:alpha:]]') from dual;
+select regexp_substr('sia³a baba mak i dosta³a 10 lat bo nie p³aci³a vat','[[:alnum:]]') from dual;
+
+select regexp_substr('sia³a baba mak i dosta³a 10 lat bo nie p³aci³a vat','[[:digit:]]{2}') from dual;
+select regexp_substr('sia³a baba mak i dosta³a 10 lat bo nie p³aci³a vat','[[:digit:]]{1,}') from dual;
+select regexp_substr('sia³a baba mak i dosta³a 10 lat bo nie p³aci³a vat','[[:digit:]]{1,3}') from dual;
+select regexp_substr('sia³a baba mak i dosta³a 10 lat bo nie p³aci³a vat','[[:digit:]]*') from dual;
+select regexp_substr('sia³a baba mak i dosta³a 10 lat bo nie p³aci³a vat','[[:digit:]]{,3}') from dual;
+
+select regexp_substr('dupa dupa dupa 1111 dupa dupa dupa 22 000 00 00 dupa dupa','[[:digit:]]{2} [[:digit:]]{3} [[:digit:]]{2} [[:digit:]]{2}') from dual;
+select regexp_substr('dupa dupa dupa 1111 dupa dupa dupa 22 000 00 00 dupa dupa','([[:digit:]]| ){13}') from dual;
+select regexp_substr('costam costam. Costam, costam www.jsystems.pl dupa dupa dupa','(www\.)[[:alnum:]]{1,}\.[[:alpha:]]{2,4}') from dual;
+
+select regexp_substr('costam costam. Costam, costam www.jsystems.pl dupa dupa dupa','(www\.)?([[:alnum:]]|_|\.){1,}\.[[:alpha:]]{2,4}') from dual;
+
+select regexp_substr('costam costam. Costam, costam www.jsystems.pl dupa dupa dupa','(www\.)?([[:alnum:]]|_|\.){1,}\.[[:alpha:]]{2,4}') from dual;
+select regexp_instr('costam costam. Costam, costam www.jsystems.pl dupa dupa dupa','(www\.)?([[:alnum:]]|_|\.){1,}\.[[:alpha:]]{2,4}') from dual;
+select regexp_count('dupa dupa dupa 1111 dupa dupa dupa 22 000 00 00 dupa dupa','[[:digit:]]') from dual;
+
+update employees set last_name=last_name||'1' where department_id=90;
+
+select * from employees where regexp_like(last_name,'.*[[:digit:]]');
+
+select regexp_replace('dupa dupa dupa 1111 dupa dupa dupa 22 000 00 00 dupa dupa','[[:digit:]]','X') from dual;
+
+/*55.
+Wyœwietl osoby majace dwuczlonowe nazwisko za pomoc¹ regexp_like
+*/
