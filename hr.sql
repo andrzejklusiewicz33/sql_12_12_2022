@@ -1714,3 +1714,13 @@ commit;
 select * from employees;
 
 --regexp_count w where ....
+
+select employee_id,phone_number,regexp_count(phone_number,'[[:digit:]]')
+from employees where regexp_count(phone_number,'[[:digit:]]')>=13;
+
+
+/*57.
+Z ci¹gu " fgsfsf@fdsff-pl @11a biuro@jsystems.pl aaddda"  wyci¹gnij przy u¿yciu wyra¿eñ regularnych nasz email.
+Zalozenie jest takie ze email moze byc np. w domenie jsystems.com.pl albo jsystems.pl a poczatek maila moze byc np. andrzej.klusiewicz@
+lub np. andrzej_klusiewicz@
+*/
