@@ -1725,4 +1725,10 @@ Zalozenie jest takie ze email moze byc np. w domenie jsystems.com.pl albo jsyste
 lub np. andrzej_klusiewicz@
 */
 
-select regexp_substr('fgsfsf@fdsff-pl @11a biuro@jsystems.pl aaddda','[[:alpha:]]@[[:alpha:]]') from dual;
+select regexp_substr('fgsfsf@fdsff-pl @11a biuro@jsystems.pl aaddda','[[:alpha:]]@[[:alpha:]]',1,2) from dual;
+select regexp_substr('fgsfsf@fdsff-pl @11a biuro@jsystems.pl aaddda','[[:alnum:]]{1,}([[:alnum:]]|_|\.)*@[[:alnum:]]{1,}([[:alnum:]]|_|\.)*\.[[:alpha:]]{2,4}') from dual;
+select regexp_substr('fgsfsf@fdsff-pl @11a andrzej.klusiewicz@jsystems.pl aaddda','[[:alnum:]]{1,}([[:alnum:]]|_|\.)*@[[:alnum:]]{1,}([[:alnum:]]|_|\.)*\.[[:alpha:]]{2,4}') from dual;
+select regexp_substr('fgsfsf@fdsff-pl @11a andrzej_klusiewicz@jsystems.com.pl aaddda',
+'[[:alnum:]]{1,}([[:alnum:]]|_|\.)*@[[:alnum:]]{1,}([[:alnum:]]|_|\.)*\.[[:alpha:]]{2,4}') from dual;
+
+--przerwa do 16:11
