@@ -1507,8 +1507,34 @@ from employees;
 Stwórz tabelkê która bêdzie zawierala klucz glowny, numer miesiaca i kwotê bilansu jako kolumny.
 Wszystkie kolumny maja miec wlasnosc wymuszaca wstawienie wartosci (czyli nie moze byc null).
 Dodaj sekwencjê i korzystajac z niej wstaw 12 wierszy  - po jednym dla kazdego miesiaca z jakims wymyslonym bilansem.
+
+
 Wyswietl miesiace, bilanse dla kazdego miesiaca , sumê bilansów od poczatku roku do danego miesiaca,
 srednia bilansow zaokraglona od poczatku roku do danego miesiaca , miejsce w rankingu bilansow danego miesiaca 
 wzgledem calego roku, roznice pomiedzy bilansem  w danym miesiacu a poprzedzajacym miesiacu.
 Caly wynik powinien byc posortowany wzgledem numeru miesiaca, a kolumny powinny miec aliasy
 */
+
+create table wyniki_finansowe(
+id integer primary key,
+miesiac integer not null,
+bilans number not null
+);
+
+create sequence wf;
+
+insert into wyniki_finansowe values (wf.nextval,1,345691);
+insert into wyniki_finansowe values (wf.nextval,2,286000);
+insert into wyniki_finansowe values (wf.nextval,3,-420040);
+insert into wyniki_finansowe values (wf.nextval,4,15432);
+insert into wyniki_finansowe values (wf.nextval,5,-9000);
+insert into wyniki_finansowe values (wf.nextval,6,-57000);
+insert into wyniki_finansowe values (wf.nextval,7,654320);
+insert into wyniki_finansowe values (wf.nextval,8,-260780);
+insert into wyniki_finansowe values (wf.nextval,9,-467001);
+insert into wyniki_finansowe values (wf.nextval,10,525200);
+insert into wyniki_finansowe values (wf.nextval,11,-130050);
+insert into wyniki_finansowe values (wf.nextval,12,-250670);
+commit;
+
+select * from wyniki_finansowe;
