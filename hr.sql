@@ -1334,3 +1334,21 @@ insert into dane_kontaktowe
 select employee_Id,first_name,lasT_name,email,phone_number from employees;
 commit;
 select * from dane_kontaktowe;
+
+
+select * from employees;
+
+select last_name,salary,dense_rank() over(order by salary desc) from employees;
+select last_name,salary,dense_rank() over(order by salary desc),rank() over(order by salary desc) from employees;
+
+select employee_id,last_name,salary,dense_rank() over(order by salary desc, employee_id) from employees;
+
+select employee_id,last_name,salary hajs,dense_rank() over(order by salary desc, employee_id) ranking from employees;
+
+/*47.
+Wyswietl nazwiska, daty zatrudnienia w formacie dd-mm-yyyy oraz ranking w ktorym pierwsze miejsce zajmie osoba
+najwczesniej zatrudniona. Nie chcemy umozliwiac zajmowania jednego miejsca przez wiecej niz jedna osobe.
+Gdyby okazalo sie ze sa 2 lub wiecej pracownicy na tym samym miejscu to wyzej w rankingu powinna znalezc sie osoba
+zarabiajaca wiecej.
+
+*/
