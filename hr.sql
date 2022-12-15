@@ -1554,3 +1554,50 @@ select wf.*
 from wyniki_finansowe wf
 order by miesiac;
 /
+
+--przerwa do 13:03
+
+select * from employees;
+update employees set salary=1000;
+commit;
+select * from employees;
+rollback;
+
+select * from employees as of timestamp to_date('15-12-2022 12:01:00','dd-mm-yyyy hh24:mi:ss');
+
+alter table employees enable row movement;
+flashback table employees to timestamp to_date('15-12-2022 12:01:00','dd-mm-yyyy hh24:mi:ss');
+select * from employees;
+
+select * from employees as of timestamp to_timestamp('15-12-2022 12:01:00','dd-mm-yyyy hh24:mi:ss');
+
+select * from employees as of timestamp sysdate-1/24;
+flashback table employees to timestamp sysdate-1/24;
+
+select * from employees as of timestamp to_date('14-12-2022 12:01:00','dd-mm-yyyy hh24:mi:ss');
+
+create table employees_stare as 
+select * from employees as of timestamp to_date('14-12-2022 12:01:00','dd-mm-yyyy hh24:mi:ss');
+
+select * from employees_stare;
+
+
+update employees e set salary=(select round(avg(salary)) from employees where department_id=e.department_id )
+--flashback query, update i podzapytanie skorelowane
+
+update employees set salary=2000;
+commit;
+
+select first_name,last_name,salary 
+,(select salary from employees as of timestamp systimestamp-1/24 where employee_id=e.employee_id)
+from employees e;
+
+/*53.
+**. Dokonaj i zatwierdz aktualizacjê danych jak poni¿ej
+
+update employees set last_name='zmienione';
+commit;
+
+Nastepnie przywroc stan kolumny last_name do stanu przed zmiana korzystajac z 
+update, podzapytania skorelowanego i flashback query.
+*/
