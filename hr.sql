@@ -1455,3 +1455,18 @@ from employees;
 Wyœwietl nazwiska, zarobki, miejsce w rankingu zarobkow (1 miejsce zajmuje najlepiej zarabiajacy)
 i roznicê pomiedzy zarobkami danego goscia a zarobkami goscia wiersz wyzej w rankingu zarobkow.
 */
+
+select last_name,salary,
+dense_rank() over(order by salary desc) ranking,
+lag(salary) over(order by salary desc)-salary roznica_pietro_wyzej
+from employees;
+
+/*
+51.
+
+Wyœwietl nazwy departamentów, srednie zarobki w nich przyciete do calych jednostek, ----grupowanie + join
+
+miejsce w rankingu --funkcje analityczne
+srednich zarobkow w departamentach, roznicê pomiedzy srednimi zarobkami w danym departamencie a srednimi zarobkami
+w departamencie o wiersz wyzej w rankingu.
+*/
