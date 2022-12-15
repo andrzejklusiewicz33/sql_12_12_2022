@@ -1732,3 +1732,26 @@ select regexp_substr('fgsfsf@fdsff-pl @11a andrzej_klusiewicz@jsystems.com.pl aa
 '[[:alnum:]]{1,}([[:alnum:]]|_|\.)*@[[:alnum:]]{1,}([[:alnum:]]|_|\.)*\.[[:alpha:]]{2,4}') from dual;
 
 --przerwa do 16:11
+grant create view to hr;
+
+
+create or replace view raport1 as 
+select department_name,round(avg(Salary)) srednia,count(*) liczba_pracownikow
+from employees join departments using(department_id) group by department_name;
+
+select * from raport1;
+
+select * from user_views;
+
+select department_name,round(avg(Salary)) srednia,count(*) liczba_pracownikow
+from employees join departments using(department_id) group by department_name
+
+select * from raport1;
+
+/*58.
+Stwórz widok który bedzie wyœwietla³ rok zatrudnienia, ilosc osob zatrudnionych w danym roku, 
+srednia zarobkow osob zatrudnionych w danym roku przycieta do jednostek
+
+iloœæ ró¿nych departamentów w których pracuj¹ osoby zatrudnione w danym roku.
+
+*/
