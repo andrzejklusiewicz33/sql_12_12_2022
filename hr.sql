@@ -1755,3 +1755,54 @@ srednia zarobkow osob zatrudnionych w danym roku przycieta do jednostek
 iloœæ ró¿nych departamentów w których pracuj¹ osoby zatrudnione w danym roku.
 
 */
+
+with dane as  (select * from employees)
+select * from dane;
+
+
+create or replace view cwiczenie58 as
+select to_char(hire_Date,'yyyy') rok,count(*) ilosc_pracownikow,round(avg(salary)) srednia,count(distinct department_id) roznych_departamentow
+from employees
+group by to_char(hire_Date,'yyyy');
+
+select * from cwiczenie58;
+select * from cwiczenie58 where ilosc_pracownikow>10;
+
+
+create or replace view raport_z_wpytke_waznymi_danymi as
+select to_char(hire_Date,'yyyy') rok,count(*) ilosc_pracownikow,round(avg(salary)) srednia,count(distinct department_id) roznych_departamentow
+from employees
+group by to_char(hire_Date,'yyyy');
+
+select length('raport_z_wpytke_waznymi_danymi') from dual;
+
+select * from raport_z_wpytke_waznymi_danymi;
+
+create synonym rzwwd for raport_z_wpytke_waznymi_danymi;
+create public synonym rzwwd for raport_z_wpytke_waznymi_danymi;
+
+select * from rzwwd;
+
+select * from user_constraints where constraint_type='P';
+select * from user_indexes;
+select * from user_dependencies where name='RAPORT_Z_WPYTKE_WAZNYMI_DANYMI';
+
+
+CREATE TABLE ABC(
+....
+...
+EMPLOYEE_ID INTEGER REFERENCES EMPLOYEES(EMPLOYEE_ID)
+);
+
+ALTER TABLE EMPLOYEES MODIFY (DEPARTMENT_ID INTEGER REFERENCES DEPARTMENTS(DEPARTMENT_ID));
+
+select * from user_constraints;
+select * from ALL_constraints;
+
+SELECT * FROM USER_TABLES;
+SELECT * FROM ALL_TABLES;
+
+SELECT * FROM USER_SEQUENCES;
+SELECT * FROM ALL_SEQUENCES;
+
+SELECT * FROM HR.EMPLOYEES;
