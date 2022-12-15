@@ -1350,5 +1350,23 @@ Wyswietl nazwiska, daty zatrudnienia w formacie dd-mm-yyyy oraz ranking w ktorym
 najwczesniej zatrudniona. Nie chcemy umozliwiac zajmowania jednego miejsca przez wiecej niz jedna osobe.
 Gdyby okazalo sie ze sa 2 lub wiecej pracownicy na tym samym miejscu to wyzej w rankingu powinna znalezc sie osoba
 zarabiajaca wiecej.
+*/
 
+select last_name,to_char(hire_date,'dd-mm-yyyy'),
+dense_rank() over(order by hire_date,salary desc) ranking,
+rank() over(order by hire_date,salary desc) ranking2
+from employees;
+
+select last_name,salary,department_id
+, dense_rank() over(partition by department_id order by salary desc )
+from employees;
+
+
+
+select last_name,salary,to_char(hire_date,'mm')
+, dense_rank() over(partition by to_char(hire_date,'mm') order by salary desc )
+from employees;
+
+/*48.
+  Wyœwietl nazwisko, rok zatrudnienia, ranking wzgledem zarobkow tak by kazdy rok zatrudnienia mial swoj osobny ranking.
 */
