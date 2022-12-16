@@ -2074,4 +2074,5 @@ Z SYSA:
 
 select * from all_directories;
 create directory pliki as 'd:\pliki';
+GRANT read,write on directory pliki to hr;
 */
