@@ -1985,6 +1985,7 @@ Odswiez widok...
 
 /
 
-select last_name,job_title,salary,(select round(avg(salary)) from employees where department_id=e.department_id) srednia
+select last_name,job_title,salary,(select round(avg(salary)) from employees where department_id=e.department_id) srednia,
+round(avg(salary) over(partition by e.department_id)) srednia_analityczna
 ,department_name
 from employees e join departments d on e.department_id=d.department_id join jobs using(job_id);
