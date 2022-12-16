@@ -1837,6 +1837,16 @@ select * from employees@produkcja join departments using(department_id);
 Stwórz widok który bêdzie wyœwietlal lokalizacje które pojawiaja sie na serwerze zdalnym ale brakuje ich lokalnie.
 */
 
+create database link wchmurce 
+connect to hr identified by szkolenie_jsystems_2021
+using '13.74.139.54/XEPDB1';
+
+
+create or replace view roznica_lokalizacji as 
+select * from locations@wchmurce where location_id not in (select location_id from locations);
+
+select * from roznica_lokalizacji;
+/
 update 
 insert 
 savepoint a
@@ -1847,3 +1857,46 @@ rollback to savepoint a;
 --XEPDB1
 --szkolenie_jsystems_2021
 select * from locations;
+drop database link jakistam;
+grant create database link to hr;
+/
+
+rollback;
+drop table tymczas1;
+drop table tymczas2;
+drop table tymczas3;
+
+create global temporary table tymczas1(
+id_t integer,
+tekst varchar2(4000)
+);
+
+create global temporary table tymczas2(
+id_t integer,
+tekst varchar2(4000)
+) on commit delete rows;
+
+create global temporary table tymczas3(
+id_t integer,
+tekst varchar2(4000)
+) on commit preserve rows;
+
+insert into tymczas1 values (1,'Czas na pierogi');
+insert into tymczas2 values (1,'Czas na pierogi');
+insert into tymczas3 values (1,'Czas na pierogi');
+select * from tymczas1;
+select * from tymczas2;
+select * from tymczas3;
+commit;
+
+drop table employees;
+drop table job_history;
+select * from user_recyclebin;
+flashback table job_history to before drop;
+select * from job_history;
+
+create table abc as select * from employees;
+
+/*60.
+Stwórz tabelê tymczasow¹ zawieraj¹c¹ wynik zapytania zwracaj¹cego nazwy departamentów i liczbê pracowników w nich.
+*/
