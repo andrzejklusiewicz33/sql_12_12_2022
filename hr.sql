@@ -2260,3 +2260,93 @@ select avg(salary) from emp;
 e)
 select salary from emp;
 */
+
+create index funkcyjny on emps(to_char(hire_date,'yyyy'));
+select to_char(hire_date,'yyyy') from emps;
+
+--3/1
+select employee_id,last_name from emp;
+create index eidln on emp(employee_id,last_name);
+
+--4/1
+select last_name from emp where department_id=90 order by manager_id;
+create index didmanaln on emp(department_id,manager_id);
+create index didmanaln2 on emp(department_id,manager_id,last_name);
+--3/1
+select avg(salary) from emp;
+create index hajs on emp(salary);
+--3
+select salary from emp;
+select salary from emp where salary is not null;
+
+desc emp;
+
+create index index_z_koza on emp(salary,'koza');
+create index index_z_1 on emp(salary,1);
+select salary from emp;
+
+select commission_pct,'koza' from emp;
+
+--histogramy
+
+--przerwa do 16:17
+
+
+drop table emp;
+create table emp as select * from employees;
+
+select * from emp;
+
+select lasT_name,(select max(hire_date) from emp) from emp;
+select /*+full(emp)*/lasT_name,(select /*+full(emp)*/ max(hire_date) from emp) from emp;
+select last_name from emp;
+create index nazwiska on emp(last_name);
+select max(hire_date) from emp;
+create index daty_zatrudnienia on emp(hire_date);
+
+select lasT_name,(select max(hire_date) from emp where department_id=e.department_id) from emp e;
+
+select max(hire_date) from emp where department_id=90;
+create index did_hd on emp(department_id,hire_date);
+
+select last_name from emp;
+create index nazwiska on emp(last_name);
+select last_name,department_id from emp;
+create index nazwiska_departamenty on emp(last_name,department_id);
+select last_name,department_id from emp join (
+select department_id,max(hire_date) from emp group by department_id
+) using(department_id);
+
+drop index did_hd;
+select to_char(hire_date,'mm') from emp;
+
+create index fun on emp(to_char(hire_date,'mm'));
+
+
+select last_NAME,avg(salary) over(partition by department_id) from emp;
+create index analityczna on emp(department_id,salary,last_name);
+
+create table joby as select * from jobs;
+--6/2
+select last_name,job_title from emp join joby using(job_id);
+create index j1 on emp(job_id,lasT_name);
+create index j2 on joby(job_id,job_title);
+
+/*65.
+Skasuj tabelê emp i stwórz j¹ jeszcze raz, oraz dodaj dwie nowe tabele:
+
+drop table emp;
+create table emp as select * from employees;
+create table dep as select * from departments;
+create table loc as select * from locations;
+execute dbms_stats.gather_schema_stats('hr');
+
+Zoptymalizuj poni¿sze zapytania:
+
+select last_name, salary , (select avg(salary) from emp) from emp;
+select last_name, salary , (select avg(salary) from emp where department_id=e.department_id) from emp e;
+select last_name,to_char(hire_date,'yyyy') from emp order by 2 desc;
+select last_name,salary,manager_Id, max(salary) over(partition by manager_id) from emp;
+select city, count(*) from emp join dep using(department_id) join loc using(location_id) group by city;
+
+*/
