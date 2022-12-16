@@ -2100,3 +2100,163 @@ select * from imiona;
 /*63.
 Umieœæ plik dane.csv w podkatalogu widocznym przez Oracle i zaloz na niego external table.
 */
+
+select  * from employees;
+
+create index abc on tabela(kolumna);
+
+select * from employees where department_id=30;
+select department_id,rowid from employees order by 1;
+select * from employees where rowid='AAAR6YAAEAAALBeAB5';
+
+select * from employees where department_id=30;
+select /*+full(employees)*/* from employees where department_id=30;
+
+select /*+use_merge(e d)*/* from employees e join departments d using(department_id);
+select /*+use_hash(e d)*/* from employees e join departments d using(department_id);
+select /*+use_nl(e d)*/* from employees e join departments d using(department_id);
+
+select * from employees e join departments d using(department_id);
+
+DROP TABLE EMPS;
+CREATE TABLE EMPS AS SELECT * FROM EMPLOYEES;
+
+EXECUTE DBMS_STATS.GATHER_TABLE_STATS('HR','EMPS');
+
+SELECT * FROM USER_TABLES;
+SELECT * FROM USER_TAB_COLS;
+
+SELECT NUM_ROWS FROM USER_TABLES WHERE TABLE_NAME='EMPS';
+
+--MERGE 6
+select * from empS e join departments d using(department_id);
+
+--hash join 5019
+select /*+use_merge(e d)*/* from empS e join departments d using(department_id);
+
+SELECT COUNT(*) FROM EMPS;
+/
+BEGIN
+FOR X IN 1..14 LOOP
+    INSERT INTO EMPS SELECT * fROM EMPS;
+END LOOP;
+COMMIT;
+END;
+/
+
+EXECUTE DBMS_STATS.GATHER_index_STATS('HR','emp_emp_id_pk');
+EXECUTE DBMS_STATS.GATHER_TABLE_STATS('HR','EMPS');
+EXECUTE DBMS_STATS.GATHER_schema_STATS('HR');
+
+EXECUTE DBMS_STATS.gather_database_stats;
+EXECUTE DBMS_STATS.gather_system_stats;
+
+--przerwa do 14:47
+
+create table indeksowa(
+pole1 integer primary key,
+pole2 integer,
+pole3 integer
+);
+
+/
+
+begin
+for x in 1..100000 loop
+insert into indeksowa values (x,mod(x,1000),mod(x,10));
+end loop;
+commit;
+end;
+
+execute dbms_stats.gather_table_stats('hr','indeksowa');
+select count(*) from indeksowa;
+select count(*) from indeksowa where pole2=980;
+
+--446 full scan 
+select * from indeksowa where pole2=980;
+--446 full scan 
+select * from indeksowa where pole3=1;
+
+create index p2 on indeksowa(pole2);
+
+create index nazwa on tabela(kolumna);
+create index nazwa on tabela(kolumna,kolumna2);
+create unique index nazwa on tabela(kolumna);
+create unique index nazwa on tabela(kolumna,kolumna2);
+create index nazwa on tabela(funkcja(kolumna));
+
+drop table emps;
+create table emps as select * from employees;
+
+--3/1
+select last_name from emps;
+create index ln on emps(last_name);
+--3/1
+select last_name,hire_date from emps;
+create index hd on emps(hire_date);
+
+create index ln_hd on emps(hire_date,last_name);
+--3/2
+select * from emps where manager_id=103;
+create index mana on emps(manager_id);
+select manager_id,rowid from emps order by 1;
+
+--3/1
+select max(hire_date) from emps;
+create index hd on emps(hire_date);
+
+--4/1
+select department_id, sum(salary) from emps 
+where department_id is not null
+group by department_id;
+
+create index did_Sa on emps(department_id,salary);
+
+
+--4/2
+select first_name,employee_id from emps order by 2;
+
+create table big as select * from employees;
+
+BEGIN
+FOR X IN 1..14 LOOP
+    INSERT INTO big SELECT * fROM big;
+END LOOP;
+COMMIT;
+dbms_stats.gather_table_stats('hr','big');
+END;
+
+--1
+select first_name,employee_id from emps order by 2;
+create index fneid on emps(first_name,employee_id);
+create index eidfn on emps(employee_id,first_name);
+
+alter table emps modify(first_name varchar2(400) not null);
+alter table emps modify(employee_id integer not null);
+
+select first_name,employee_id from big order by 2;
+
+select last_name, avg(salary) over(partition by department_id) from big;
+select last_name,(select avg(salary) from big where department_id=e.department_id) from big e;
+
+drop index abc;
+
+select * from user_indexes;
+
+/*
+64.
+Stwórz tabelê i odswiez dla niej statystyki:
+create table emp as select * from employees;
+execute dbms_stats.gather_table_stats('hr','emp');
+
+SprawdŸ i odnotuj poczatkowe koszty wykonania ponizszych zapytan. Nastepnie korzystajac 
+z indeksow zoptymalizuj te zapytania.
+a)
+select employee_id,last_name from emp;
+b) 
+select last_name from emp where department_id=90 order by manager_id;
+d)
+select avg(salary) from emp;
+e)
+select salary from emp;
+*/
