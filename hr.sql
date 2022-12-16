@@ -1900,3 +1900,4 @@ create table abc as select * from employees;
 /*60.
 Stwórz tabelê tymczasow¹ zawieraj¹c¹ wynik zapytania zwracaj¹cego nazwy departamentów i liczbê pracowników w nich.
 */
+
