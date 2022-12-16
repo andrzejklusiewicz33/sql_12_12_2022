@@ -1806,3 +1806,39 @@ SELECT * FROM USER_SEQUENCES;
 SELECT * FROM ALL_SEQUENCES;
 
 SELECT * FROM HR.EMPLOYEES;
+
+select sysdate from dual;
+
+
+select * from tabelka@server join innatabelka@innyserver using ....
+
+/
+select * from user_views;
+select * from all_views;
+
+--linki bazodanowe
+--tabele tymczasowe
+--widoki zmaterializowane
+--sqlloader
+--external table 
+
+--update 
+--insert 
+--create table 
+--rollback
+
+create database link produkcja 
+connect to hr identified by hr
+using '127.0.0.1/XEPDB1';
+
+select * from employees@produkcja join departments using(department_id);
+
+/*59.
+Stwórz widok który bêdzie wyœwietlal lokalizacje które pojawiaja sie na serwerze zdalnym ale brakuje ich lokalnie.
+*/
+
+
+--13.74.139.54
+--XEPDB1
+--szkolenie_jsystems_2021
+select * from locations;
