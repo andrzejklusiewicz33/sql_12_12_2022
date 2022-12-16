@@ -1837,7 +1837,12 @@ select * from employees@produkcja join departments using(department_id);
 Stwórz widok który bêdzie wyœwietlal lokalizacje które pojawiaja sie na serwerze zdalnym ale brakuje ich lokalnie.
 */
 
-
+update 
+insert 
+savepoint a
+update
+delete
+rollback to savepoint a;
 --13.74.139.54
 --XEPDB1
 --szkolenie_jsystems_2021
