@@ -2026,3 +2026,52 @@ sqlldr hr/szkolenie_jsystems_2021@13.74.139.54/XEPDB1 control=d:\config.txt
 */
 
 /*62. Wczytaj dane z pliku csv do lokalnego schematu hr*/
+
+--sqlldr hr/hr@localhost/XEPDB1 control=d:\config.txt
+
+select * from dane;
+
+--external table 
+
+--przerwa do 13:04
+
+/*
+CREATE TABLE regiony_plik (
+region_id number,
+region_name varchar2(100)
+)
+ORGANIZATION EXTERNAL (
+TYPE oracle_loader
+DEFAULT DIRECTORY loader
+ACCESS PARAMETERS(
+FIELDS TERMINATED BY ','
+MISSING FIELD VALUES ARE NULL
+(region_id, region_name)
+)
+LOCATION ('regiony.csv')
+)
+REJECT LIMIT UNLIMITED;
+*/
+
+select * from all_directories;
+
+CREATE TABLE regiony_plik (
+region_id number,
+region_name varchar2(100)
+)
+ORGANIZATION EXTERNAL (
+TYPE oracle_loader
+DEFAULT DIRECTORY loader
+ACCESS PARAMETERS(
+FIELDS TERMINATED BY ','
+(region_id, region_name)
+)
+LOCATION ('regiony.csv')
+);
+
+/*
+Z SYSA:
+
+select * from all_directories;
+create directory pliki as 'd:\pliki';
+*/
