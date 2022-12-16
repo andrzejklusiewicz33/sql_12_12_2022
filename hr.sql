@@ -2350,3 +2350,72 @@ select last_name,salary,manager_Id, max(salary) over(partition by manager_id) fr
 select city, count(*) from emp join dep using(department_id) join loc using(location_id) group by city;
 
 */
+
+select last_name, salary , (select avg(salary) from emp) from emp;
+
+create index szmalec on emp(salary,last_name);
+
+select last_name, salary , (select avg(salary) from emp where department_id=e.department_id) from emp e;
+
+create index omg_wtf_rotlf on emp(department_id,salary,last_name);
+create index podzapytanie on emp(department_id,salary);
+create index nadzapytanie on emp(last_name,salary,department_id);
+drop index nadzapytanie;
+select last_name,to_char(hire_date,'yyyy') from emp order by 2 desc;
+
+create index fun2 on emp(to_char(hire_date,'yyyy'),last_name);
+create index fun3 on emp(hire_date,last_name);
+
+select last_name,salary,manager_Id, max(salary) over(partition by manager_id) from emp;
+
+create index anali on emp(manager_id,salary,last_name);
+
+select city, count(*) from emp join dep using(department_id) join loc using(location_id) group by city;
+select /*+full(emp) full(dep) full(loc)*/city, count(*) from emp join dep using(department_id) join loc using(location_id) group by city;
+create index trio_emp on emp(department_id);
+create index trio_loc on loc(location_id,city);
+create index trio_dep on dep(department_id,location_id);
+
+select department_Id,location_id from dep;
+
+--klusiewicz@jsystems.pl
+/
+select last_name,level from employees
+start with manager_id is null
+connect by prior employee_id=manager_id;
+
+
+select last_name,level from employees
+start with employee_id=102
+connect by prior employee_id=manager_id;
+
+
+select avg(salary),count(*) from employees
+start with employee_id=102
+connect by prior employee_id=manager_id;
+
+
+select avg(salary),count(*) from employees
+start with manager_id=102
+connect by prior employee_id=manager_id;
+
+
+select department_id,manageR_Id,count(*) 
+from employees
+group by department_id,manager_id 
+order by 1,2;
+
+
+select department_id,manageR_Id,count(*) 
+from employees
+group by rollup(department_id,manager_id );
+
+
+select department_id,manageR_Id,count(*) 
+from employees
+group by cube(department_id,manager_id );
+
+with agregat as (select department_id,count(*) liczba from employees group by department_id)
+select * from agregat join departments using(department_id);
+
+--klusiewicz@jsystems.pl
