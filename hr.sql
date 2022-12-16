@@ -1902,6 +1902,83 @@ Stwórz tabelê tymczasow¹ zawieraj¹c¹ wynik zapytania zwracaj¹cego nazwy departam
 */
 
 
+create global temporary table dep_count as 
 select department_name, count(*) liczba 
 from employees join departments using(department_id)
 group by department_name;
+
+
+select * from dep_count;
+
+
+create global temporary table dep_count2 on commit preserve rows as 
+select department_name, count(*) liczba 
+from employees join departments using(department_id)
+group by department_name;
+
+
+select * from dep_count2;
+
+
+--widoki zmaterializowane
+--sqlloader
+--external table 
+
+--przerwa do 11:45
+
+create or replace view zwykly_widok as 
+select department_name,round(avg(salary)) srednia
+from employees join departments using(department_id) group by department_name;
+
+
+select * from zwykly_widok;
+
+
+create materialized view widok_zmaterializowany as
+select department_name,round(avg(salary)) srednia
+from employees join departments using(department_id) group by department_name;
+
+create materialized view log on employees;
+create materialized view kopia as select employee_id,last_name,first_name from employees;
+execute dbms_mview.refresh('kopia');
+execute dbms_mview.refresh('kopia','f');
+
+select * from widok_zmaterializowany;
+
+execute dbms_mview.refresh('widok_zmaterializowany');
+/
+create or replace trigger refresher 
+after update of salary on employees
+declare
+pragma autonomous_transaction;
+begin
+dbms_output.put_line('odswiezanie widoku zmaterializowanego');
+dbms_mview.refresh('widok_zmaterializowany');
+dbms_output.put_line('odswiezone....');
+end;
+/
+update employees set salary=salary+100;
+
+drop materialized view widok_zmaterializowany;
+
+create materialized view widok_zmaterializowany 
+enable query rewrite
+as
+select department_name,round(avg(salary)) srednia
+from employees join departments using(department_id) group by department_name;
+
+
+alter session set query_rewrite_enabled=true;
+
+select department_name,round(avg(salary)) srednia
+from employees join departments using(department_id) group by department_name;
+
+/*61.
+Stwórz widok zmaterializowany który bêdzie zawieral nazwiska,
+nazwa stanowiska (tabela jobs), zarobki, srednie zarobki w departamencie w ktorym pracuje danych gosc,
+nazwa departamentu w ktorym pracuje (tabela departments).
+Odswiez widok...
+*/
+
+--rman target /
+--sql 'alter user sys identified by oracle'
