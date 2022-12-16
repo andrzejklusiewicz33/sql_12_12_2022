@@ -2076,3 +2076,27 @@ select * from all_directories;
 create directory pliki as 'd:\pliki';
 GRANT read,write on directory pliki to hr;
 */
+
+select * from all_directories;
+
+
+CREATE TABLE imiona (
+id number,
+imie varchar2(100)
+)
+ORGANIZATION EXTERNAL (
+TYPE oracle_loader
+DEFAULT DIRECTORY pliki
+ACCESS PARAMETERS(
+FIELDS TERMINATED BY ';'
+(id, imie)
+)
+LOCATION ('dane.csv')
+);
+
+
+select * from imiona;
+
+/*63.
+Umieœæ plik dane.csv w podkatalogu widocznym przez Oracle i zaloz na niego external table.
+*/
