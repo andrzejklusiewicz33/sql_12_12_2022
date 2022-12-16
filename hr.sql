@@ -1985,7 +1985,44 @@ Odswiez widok...
 
 /
 
-select last_name,job_title,salary,(select round(avg(salary)) from employees where department_id=e.department_id) srednia,
+
+create materialized view cwiczenie61 as 
+select last_name,job_title,salary,
 round(avg(salary) over(partition by e.department_id)) srednia_analityczna
 ,department_name
 from employees e join departments d on e.department_id=d.department_id join jobs using(job_id);
+
+execute dbms_mview.refresh('cwiczenie61');
+
+
+--sqlloader
+--external table 
+
+/*
+ZAWARTOSC PLIKU CONFIG.TXT
+
+load data
+infile 'd:\dane.csv'
+append into table dane
+fields terminated by ';'
+(id,imie)
+
+ZAWARTOŒÆ PLIKU DANE CSV
+
+1;Andrzej
+2;Monika
+3;Laura
+4;Natalia
+
+TWORZENIE TABELKI
+
+create table dane(
+id integer,
+imie varchar2(4000)
+);
+
+WYWOLANIE CALEGO BALAGANU
+sqlldr hr/szkolenie_jsystems_2021@13.74.139.54/XEPDB1 control=d:\config.txt
+*/
+
+/*62. Wczytaj dane z pliku csv do lokalnego schematu hr*/
