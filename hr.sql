@@ -1901,3 +1901,7 @@ create table abc as select * from employees;
 Stwórz tabelê tymczasow¹ zawieraj¹c¹ wynik zapytania zwracaj¹cego nazwy departamentów i liczbê pracowników w nich.
 */
 
+
+select department_name, count(*) liczba 
+from employees join departments using(department_id)
+group by department_name;
